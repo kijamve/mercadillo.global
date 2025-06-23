@@ -1,0 +1,15 @@
+{
+  "name": "mercadillo-global-go",
+  "version": "1.0.0",
+  "description": "Mercadillo Global - E-commerce platform built with Go and Echo",
+  "scripts": {
+    "dev": "go run .",
+    "build": "go build -o bin/mercadillo-global",
+    "start": "go run .",
+    "watch": "air",
+    "check-slugs": "python check_duplicate_slugs.py"
+  },
+  "devDependencies": {
+    "air": "^1.0.0"
+  }
+} 

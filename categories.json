@@ -1,0 +1,1608 @@
+{
+  "automotriz": {
+    "name": "Automotriz",
+    "children": {
+      "accesorios-automotrices": {
+        "name": "Accesorios Automotrices",
+        "attributes": ["Marca", "Modelo", "Color", "Material", "Compatibilidad"]
+      },
+      "audio-y-multimedia": {
+        "name": "Audio y Multimedia",
+        "attributes": ["Marca", "Modelo", "Potencia", "Compatibilidad", "Tipo de Conexión"]
+      },
+      "combustibles-alternativos": {
+        "name": "Combustibles Alternativos",
+        "attributes": ["Tipo", "Capacidad", "Marca", "Compatibilidad"]
+      },
+      "equipamiento-nautico": {
+        "name": "Equipamiento Náutico",
+        "attributes": ["Marca", "Modelo", "Material", "Tamaño", "Tipo de Embarcación"]
+      },
+      "herramientas-y-equipos": {
+        "name": "Herramientas y Equipos",
+        "attributes": ["Marca", "Tipo", "Potencia", "Material"]
+      },
+      "llantas-cauchos-y-neumaticos": {
+        "name": "Llantas, Cauchos y Neumáticos",
+        "attributes": ["Marca", "Medida", "Tipo", "Índice de Carga", "Índice de Velocidad"]
+      },
+      "mantenimiento-y-limpieza": {
+        "name": "Mantenimiento y Limpieza",
+        "attributes": ["Marca", "Tipo", "Capacidad", "Aplicación"]
+      },
+      "navegacion-y-gps": {
+        "name": "Navegación y GPS",
+        "attributes": ["Marca", "Modelo", "Tipo", "Compatibilidad", "Características"]
+      },
+      "partes-y-repuestos": {
+        "name": "Partes y Repuestos",
+        "attributes": ["Marca", "Modelo", "Año", "Compatibilidad"]
+      },
+      "productos-quimicos-liquidos-aceites-y-limpieza": {
+        "name": "Productos Químicos, Líquidos, Aceites y Limpieza",
+        "attributes": ["Marca", "Tipo", "Capacidad", "Aplicación", "Especificaciones"]
+      },
+      "seguridad-y-proteccion": {
+        "name": "Seguridad y Protección",
+        "attributes": ["Marca", "Tipo", "Tamaño", "Material", "Certificaciones"]
+      },
+      "vehiculos-especializados": {
+        "name": "Vehículos Especializados",
+        "attributes": ["Marca", "Modelo", "Año", "Tipo", "Kilometraje"]
+      },
+      "otros-automotriz": {
+        "name": "Otros"
+      }
+    }
+  },
+  "campo-y-ganaderia": {
+    "name": "Campo y Ganadería",
+    "children": {
+      "tecnologia-agricola": {
+        "name": "Tecnología Agrícola",
+        "attributes": ["Marca", "Modelo", "Tipo", "Potencia", "Capacidad"]
+      },
+      "silos-y-graneros": {
+        "name": "Silos y Graneros",
+        "attributes": ["Material", "Capacidad", "Dimensiones", "Tipo"]
+      },
+      "ganado-y-cria": {
+        "name": "Ganado y Cría",
+        "attributes": ["Raza", "Edad", "Peso", "Estado de Salud", "Género"]
+      },
+      "colmenas-y-miel": {
+        "name": "Colmenas y Miel",
+        "attributes": ["Tipo", "Capacidad", "Material"]
+      },
+      "energia-solar-eolica": {
+        "name": "Energía Solar y Eólica",
+        "attributes": ["Marca", "Modelo", "Potencia", "Tipo", "Capacidad"]
+      },
+      "abonos-y-nutrientes": {
+        "name": "Abonos y Nutrientes",
+        "attributes": ["Marca", "Tipo", "Peso", "Composición", "Aplicación"]
+      },
+      "utensilios-rurales": {
+        "name": "Utensilios Rurales",
+        "attributes": ["Material", "Tipo", "Tamaño"]
+      },
+      "instalaciones-campo": {
+        "name": "Instalaciones de Campo",
+        "attributes": ["Tipo", "Material", "Dimensiones", "Capacidad"]
+      },
+      "alimentos-ganaderos": {
+        "name": "Alimentos Ganaderos",
+        "attributes": ["Marca", "Tipo", "Peso", "Composición", "Fecha de Vencimiento"]
+      },
+      "productos-agricolas": {
+        "name": "Productos Agrícolas",
+        "attributes": ["Tipo", "Variedad", "Peso", "Origen"]
+      },
+      "aceites-y-combustibles": {
+        "name": "Aceites y Combustibles",
+        "attributes": ["Marca", "Tipo", "Capacidad", "Especificaciones"]
+      },
+      "tractores-y-equipos": {
+        "name": "Tractores y Equipos",
+        "attributes": ["Marca", "Modelo", "Año", "Potencia"]
+      },
+      "cosechadoras-y-forraje": {
+        "name": "Cosechadoras y Forraje",
+        "attributes": ["Marca", "Modelo", "Tipo", "Capacidad"]
+      },
+      "cuidado-plantas": {
+        "name": "Cuidado de Plantas",
+        "attributes": ["Marca", "Tipo", "Capacidad", "Aplicación"]
+      },
+      "veterinaria": {
+        "name": "Veterinaria",
+        "attributes": ["Marca", "Tipo", "Peso", "Aplicación", "Fecha de Vencimiento"]
+      },
+      "pesticidas-y-fungicidas": {
+        "name": "Pesticidas y Fungicidas",
+        "attributes": ["Marca", "Tipo", "Capacidad", "Aplicación", "Toxicidad"]
+      },
+      "repuestos-agricolas": {
+        "name": "Repuestos Agrícolas",
+        "attributes": ["Marca", "Modelo", "Compatibilidad"]
+      },
+      "sistemas-riego": {
+        "name": "Sistemas de Riego",
+        "attributes": ["Marca", "Tipo", "Capacidad", "Alcance", "Material"]
+      },
+      "semillas-y-plantines": {
+        "name": "Semillas y Plantines",
+        "attributes": ["Tipo", "Variedad", "Cantidad", "Germinación", "Origen"]
+      },
+      "otros-campo-ganaderia": {
+        "name": "Otros"
+      }
+    }
+  },
+  "comida-y-bebidas": {
+    "name": "Comida y Bebidas",
+    "children": {
+      "bebidas": {
+        "name": "Bebidas",
+        "attributes": ["Marca", "Tipo", "Sabor", "Capacidad", "Fecha de Vencimiento"]
+      },
+      "comidas-caseras": {
+        "name": "Comidas Caseras",
+        "attributes": ["Tipo", "Ingredientes", "Porciones", "Fecha de Elaboración", "Alergenos"]
+      },
+      "productos-frescos": {
+        "name": "Productos Frescos",
+        "attributes": ["Tipo", "Variedad", "Peso", "Origen", "Fecha de Cosecha"]
+      },
+      "productos-secos": {
+        "name": "Productos Secos",
+        "attributes": ["Marca", "Tipo", "Peso", "Fecha de Vencimiento", "Ingredientes"]
+      },
+      "productos-lacteos": {
+        "name": "Productos Lácteos",
+        "attributes": ["Marca", "Tipo", "Capacidad", "Fecha de Vencimiento", "Temperatura"]
+      },
+      "otros-comida-bebidas": {
+        "name": "Otros"
+      }
+    }
+  },
+  "mascotas-y-animales": {
+    "name": "Mascotas y Animales",
+    "children": {
+      "perros": {
+        "name": "Perros",
+        "attributes": ["Raza", "Edad", "Género", "Tamaño", "Estado de Salud", "Vacunas"]
+      },
+      "gatos": {
+        "name": "Gatos",
+        "attributes": ["Raza", "Edad", "Género", "Tamaño", "Estado de Salud", "Vacunas"]
+      },
+      "aves": {
+        "name": "Aves",
+        "attributes": ["Especie", "Edad", "Género", "Tamaño", "Estado de Salud", "Vacunas"]
+      },
+      "peces": {
+        "name": "Peces",
+        "attributes": ["Especie", "Tamaño", "Color", "Estado de Salud", "Tipo de Agua"]
+      },
+      "roedores": {
+        "name": "Roedores",
+        "attributes": ["Especie", "Edad", "Género", "Tamaño", "Estado de Salud"]
+      },
+      "reptiles": {
+        "name": "Reptiles",
+        "attributes": ["Especie", "Edad", "Tamaño", "Estado de Salud", "Hábitat"]
+      },
+      "caballos": {
+        "name": "Caballos",
+        "attributes": ["Raza", "Edad", "Género", "Altura", "Estado de Salud", "Vacunas"]
+      },
+      "accesorios-mascotas": {
+        "name": "Accesorios para Mascotas",
+        "attributes": ["Tipo", "Marca", "Tamaño", "Material", "Compatibilidad"]
+      },
+      "alimentos-mascotas": {
+        "name": "Alimentos para Mascotas",
+        "attributes": ["Marca", "Tipo", "Peso", "Edad Recomendada", "Fecha de Vencimiento"]
+      },
+      "cuidado-mascotas": {
+        "name": "Cuidado de Mascotas",
+        "attributes": ["Tipo", "Marca", "Capacidad", "Fecha de Vencimiento"]
+      },
+      "otros-mascotas-animales": {
+        "name": "Otros"
+      }
+    }
+  },
+  "colecciones-y-antiguedades": {
+    "name": "Colecciones y Antigüedades",
+    "children": {
+      "monedas": {
+        "name": "Monedas",
+        "attributes": ["País", "Año", "Denominación", "Material", "Rareza"]
+      },
+      "sellos": {
+        "name": "Sellos",
+        "attributes": ["País", "Año", "Denominación", "Tema", "Rareza"]
+      },
+      "figuras": {
+        "name": "Figuras",
+        "attributes": ["Marca", "Serie", "Material", "Tamaño", "Año"]
+      },
+      "carteles": {
+        "name": "Carteles",
+        "attributes": ["Tema", "Año", "Tamaño", "Material", "Artista"]
+      },
+      "militaria": {
+        "name": "Militaria",
+        "attributes": ["Período", "País", "Tipo", "Material", "Año"]
+      },
+      "deportes": {
+        "name": "Deportes",
+        "attributes": ["Deporte", "Equipo", "Jugador", "Año", "Tipo"]
+      },
+      "antiguedades": {
+        "name": "Antigüedades",
+        "attributes": ["Período", "Tipo", "Material", "Origen", "Año"]
+      },
+      "otros-colecciones-antiguedades": {
+        "name": "Otros"
+      }
+    }
+  },
+  "manualidades-y-papeleria": {
+    "name": "Manualidades y Papelería",
+    "children": {
+      "arte": {
+        "name": "Arte",
+        "attributes": ["Tipo", "Marca", "Color", "Tamaño", "Material"]
+      },
+      "manualidades": {
+        "name": "Manualidades",
+        "attributes": ["Tipo", "Material", "Color", "Tamaño", "Edad Recomendada"]
+      },
+      "papeleria": {
+        "name": "Papelería",
+        "attributes": ["Tipo", "Marca", "Color", "Tamaño", "Cantidad"]
+      },
+      "costura": {
+        "name": "Costura",
+        "attributes": ["Tipo", "Material", "Color", "Tamaño", "Marca"]
+      },
+      "otros-manualidades-papeleria": {
+        "name": "Otros"
+      }
+    }
+  },
+  "ninos": {
+    "name": "Niños",
+    "children": {
+      "ropa-ninos": {
+        "name": "Ropa de Niños",
+        "attributes": ["Talla", "Género", "Edad", "Material", "Temporada"]
+      },
+      "juguetes-ninos": {
+        "name": "Juguetes",
+        "attributes": ["Tipo", "Marca", "Edad Recomendada", "Material", "Funciones"]
+      },
+      "cuidado-ninos": {
+        "name": "Cuidado",
+        "attributes": ["Tipo", "Marca", "Edad Recomendada", "Capacidad", "Fecha de Vencimiento"]
+      },
+      "alimentacion-ninos": {
+        "name": "Alimentación",
+        "attributes": ["Tipo", "Marca", "Edad Recomendada", "Sabor", "Fecha de Vencimiento"]
+      },
+      "seguridad-ninos": {
+        "name": "Seguridad",
+        "attributes": ["Tipo", "Marca", "Edad Recomendada", "Material", "Certificaciones"]
+      },
+      "maternidad": {
+        "name": "Maternidad",
+        "attributes": ["Tipo", "Marca", "Tamaño", "Material"]
+      },
+      "otros-ninos": {
+        "name": "Otros"
+      }
+    }
+  },
+  "fotografia-y-video": {
+    "name": "Fotografía y Video",
+    "children": {
+      "camaras-fotograficas": {
+        "name": "Cámaras Fotográficas",
+        "attributes": ["Marca", "Modelo", "Tipo", "Resolución", "Accesorios"]
+      },
+      "camaras-de-video": {
+        "name": "Cámaras de Video",
+        "attributes": ["Marca", "Modelo", "Tipo", "Resolución", "Accesorios"]
+      },
+      "drones-fotografia": {
+        "name": "Drones",
+        "attributes": ["Marca", "Modelo", "Tipo", "Alcance", "Accesorios"]
+      },
+      "lentes-y-accesorios": {
+        "name": "Lentes y Accesorios",
+        "attributes": ["Tipo", "Marca", "Compatibilidad", "Focal"]
+      },
+      "telescopios-y-binoculares": {
+        "name": "Telescopios y Binoculares",
+        "attributes": ["Tipo", "Marca", "Aumento", "Diámetro"]
+      },
+      "repuestos-y-mantenimiento": {
+        "name": "Repuestos y Mantenimiento",
+        "attributes": ["Tipo", "Marca", "Compatibilidad", "Garantía"]
+      },
+      "albumes-y-marcos": {
+        "name": "Álbumes y Marcos",
+        "attributes": ["Tipo", "Material", "Tamaño", "Color", "Capacidad"]
+      },
+      "otros-fotografia": {
+        "name": "Otros"
+      }
+    }
+  },
+  "vehiculos-y-transporte": {
+    "name": "Vehículos y Transporte",
+    "children": {
+      "autos-y-camionetas": {
+        "name": "Autos y Camionetas",
+        "attributes": ["Marca", "Modelo", "Año", "Kilometraje", "Combustible"]
+      },
+      "motos-y-ciclas": {
+        "name": "Motos y Ciclas",
+        "attributes": ["Marca", "Modelo", "Año", "Cilindrada", "Combustible"]
+      },
+      "maquinaria-industrial": {
+        "name": "Maquinaria Industrial",
+        "attributes": ["Marca", "Modelo", "Año", "Potencia"]
+      },
+      "embarcaciones": {
+        "name": "Embarcaciones",
+        "attributes": ["Marca", "Modelo", "Año", "Tipo", "Combustible"]
+      },
+      "otros-vehiculos": {
+        "name": "Otros Vehículos"
+      }
+    }
+  },
+  "telecomunicaciones": {
+    "name": "Telecomunicaciones",
+    "children": {
+      "celulares": {
+        "name": "Celulares",
+        "attributes": ["Marca", "Modelo", "Año", "Capacidad", "Color"]
+      },
+      "accesorios-moviles": {
+        "name": "Accesorios Móviles",
+        "attributes": ["Tipo", "Marca", "Compatibilidad", "Material"]
+      },
+      "relojes-inteligentes": {
+        "name": "Relojes Inteligentes",
+        "attributes": ["Marca", "Modelo", "Tipo", "Compatibilidad", "Color"]
+      },
+      "realidad-virtual": {
+        "name": "Realidad Virtual",
+        "attributes": ["Marca", "Modelo", "Tipo", "Compatibilidad", "Resolución"]
+      },
+      "comunicacion-inalambrica": {
+        "name": "Comunicación Inalámbrica",
+        "attributes": ["Tipo", "Marca", "Alcance", "Frecuencia", "Potencia"]
+      },
+      "telefonia-empresarial": {
+        "name": "Telefonía Empresarial",
+        "attributes": ["Tipo", "Marca", "Modelo", "Capacidad", "Características"]
+      },
+      "repuestos-moviles": {
+        "name": "Repuestos Móviles",
+        "attributes": ["Tipo", "Marca", "Compatibilidad", "Garantía"]
+      },
+      "otros-telecomunicaciones": {
+        "name": "Otros"
+      }
+    }
+  },
+  "tecnologia": {
+    "name": "Tecnología",
+    "children": {
+      "computadores-portatiles": {
+        "name": "Computadores Portátiles",
+        "attributes": ["Marca", "Modelo", "Procesador", "RAM", "Almacenamiento"]
+      },
+      "computadores-de-escritorio": {
+        "name": "Computadores de Escritorio",
+        "attributes": ["Marca", "Modelo", "Procesador", "RAM", "Almacenamiento"]
+      },
+      "tablets": {
+        "name": "Tablets",
+        "attributes": ["Marca", "Modelo", "Tamaño", "Almacenamiento", "Color"]
+      },
+      "componentes-informaticos": {
+        "name": "Componentes Informáticos",
+        "attributes": ["Tipo", "Marca", "Modelo", "Compatibilidad", "Garantía"]
+      },
+      "perifericos": {
+        "name": "Periféricos",
+        "attributes": ["Tipo", "Marca", "Modelo", "Conexión", "Compatibilidad"]
+      },
+      "redes-y-conectividad": {
+        "name": "Redes y Conectividad",
+        "attributes": ["Tipo", "Marca", "Modelo", "Velocidad", "Características"]
+      },
+      "almacenamiento-digital": {
+        "name": "Almacenamiento Digital",
+        "attributes": ["Tipo", "Marca", "Modelo", "Capacidad", "Conexión"]
+      },
+      "impresoras-y-escanners": {
+        "name": "Impresoras y Escáneres",
+        "attributes": ["Tipo", "Marca", "Modelo", "Tecnología", "Conexión"]
+      },
+      "monitores-y-pantallas": {
+        "name": "Monitores y Pantallas",
+        "attributes": ["Marca", "Modelo", "Tamaño", "Resolución", "Conexión"]
+      },
+      "proyectores-tecnologia": {
+        "name": "Proyectores",
+        "attributes": ["Marca", "Modelo", "Luminosidad", "Resolución", "Conexión"]
+      },
+      "energia-y-proteccion": {
+        "name": "Energía y Protección",
+        "attributes": ["Tipo", "Marca", "Modelo", "Potencia", "Características"]
+      },
+      "programas-y-aplicaciones": {
+        "name": "Programas y Aplicaciones",
+        "kyc": true
+      },
+      "accesorios-gaming": {
+        "name": "Accesorios Gaming",
+        "attributes": ["Tipo", "Marca", "Modelo", "Compatibilidad", "Características"]
+      },
+      "otros-tecnologia": {
+        "name": "Otros"
+      }
+    }
+  },
+  "entretenimiento-digital": {
+    "name": "Entretenimiento Digital",
+    "children": {
+      "consolas-de-juego": {
+        "name": "Consolas de Juego",
+        "attributes": ["Marca", "Modelo", "Generación", "Capacidad", "Accesorios"]
+      },
+      "juegos": {
+        "name": "Juegos",
+        "attributes": ["Título", "Plataforma", "Género", "Edición", "Idioma"]
+      },
+      "accesorios-gaming-consolas": {
+        "name": "Accesorios Gaming",
+        "attributes": ["Tipo", "Marca", "Modelo", "Compatibilidad", "Características"]
+      },
+      "repuestos-consolas": {
+        "name": "Repuestos",
+        "attributes": ["Tipo", "Marca", "Compatibilidad", "Garantía"]
+      },
+      "otros-entretenimiento": {
+        "name": "Otros"
+      }
+    }
+  },
+  "hogar-y-construccion": {
+    "name": "Hogar y Construcción",
+    "children": {
+      "puertas-y-ventanas": {
+        "name": "Puertas y Ventanas",
+        "attributes": ["Tipo", "Material", "Tamaño", "Color", "Instalación"]
+      },
+      "herramientas": {
+        "name": "Herramientas",
+        "attributes": ["Tipo", "Marca", "Modelo", "Potencia"]
+      },
+      "banos": {
+        "name": "Baños",
+        "attributes": ["Tipo", "Material", "Tamaño", "Color", "Instalación"]
+      },
+      "instalaciones-electricas": {
+        "name": "Instalaciones Eléctricas",
+        "attributes": ["Tipo", "Marca", "Modelo", "Potencia", "Certificación"]
+      },
+      "materiales-construccion": {
+        "name": "Materiales de Construcción",
+        "attributes": ["Tipo", "Marca", "Material", "Tamaño", "Cantidad"]
+      },
+      "cocinas": {
+        "name": "Cocinas",
+        "attributes": ["Tipo", "Material", "Tamaño", "Color", "Instalación"]
+      },
+      "equipos-construccion": {
+        "name": "Equipos de Construcción",
+        "attributes": ["Tipo", "Marca", "Modelo", "Potencia"]
+      },
+      "pinturas": {
+        "name": "Pinturas",
+        "attributes": ["Tipo", "Marca", "Color", "Capacidad", "Aplicación"]
+      },
+      "pisos-y-paredes": {
+        "name": "Pisos y Paredes",
+        "attributes": ["Tipo", "Material", "Tamaño", "Color", "Instalación"]
+      },
+      "plomeria": {
+        "name": "Plomería",
+        "attributes": ["Tipo", "Material", "Tamaño", "Instalación", "Presión"]
+      },
+      "otros-construccion": {
+        "name": "Otros"
+      }
+    }
+  },
+  "deportes-y-actividades": {
+    "name": "Deportes y Actividades",
+    "children": {
+      "deportes-de-contacto": {
+        "name": "Deportes de Contacto",
+        "attributes": ["Tipo", "Marca", "Tamaño", "Material", "Protección"]
+      },
+      "deportes-de-pelota": {
+        "name": "Deportes de Pelota",
+        "attributes": ["Tipo", "Marca", "Tamaño", "Material"]
+      },
+      "deportes-acuaticos": {
+        "name": "Deportes Acuáticos",
+        "attributes": ["Tipo", "Marca", "Material", "Tamaño"]
+      },
+      "deportes-de-aventura": {
+        "name": "Deportes de Aventura",
+        "attributes": ["Tipo", "Marca", "Material", "Tamaño"]
+      },
+      "ciclismo": {
+        "name": "Ciclismo",
+        "attributes": ["Tipo", "Marca", "Modelo", "Tamaño"]
+      },
+      "equitacion": {
+        "name": "Equitación",
+        "attributes": ["Tipo", "Marca", "Material", "Tamaño"]
+      },
+      "deportes-de-invierno": {
+        "name": "Deportes de Invierno",
+        "attributes": ["Tipo", "Marca", "Material", "Tamaño"]
+      },
+      "ejercicio-y-bienestar": {
+        "name": "Ejercicio y Bienestar",
+        "attributes": ["Tipo", "Marca", "Modelo", "Tamaño"]
+      },
+      "futbol": {
+        "name": "Fútbol",
+        "attributes": ["Tipo", "Marca", "Material", "Tamaño"]
+      },
+      "deportes-extremos": {
+        "name": "Deportes Extremos",
+        "attributes": ["Tipo", "Marca", "Material", "Tamaño"]
+      },
+      "juegos-de-mesa": {
+        "name": "Juegos de Mesa",
+        "attributes": ["Tipo", "Marca", "Material", "Tamaño", "Edad"]
+      },
+      "patinaje": {
+        "name": "Patinaje",
+        "attributes": ["Tipo", "Marca", "Material", "Tamaño"]
+      },
+      "montanismo": {
+        "name": "Montañismo",
+        "attributes": ["Tipo", "Marca", "Material", "Tamaño"]
+      },
+      "natacion": {
+        "name": "Natación",
+        "attributes": ["Tipo", "Marca", "Material", "Tamaño"]
+      },
+      "deportes-de-raqueta": {
+        "name": "Deportes de Raqueta",
+        "attributes": ["Tipo", "Marca", "Material", "Tamaño"]
+      },
+      "tiro-deportivo": {
+        "name": "Tiro Deportivo",
+        "attributes": ["Tipo", "Marca", "Modelo", "Calibre"]
+      },
+      "voleibol": {
+        "name": "Voleibol",
+        "attributes": ["Tipo", "Marca", "Material", "Tamaño"]
+      },
+      "deportes-nauticos": {
+        "name": "Deportes Náuticos",
+        "attributes": ["Tipo", "Marca", "Material", "Tamaño"]
+      },
+      "ropa-y-calzado-deportivo": {
+        "name": "Ropa y Calzado Deportivo",
+        "attributes": ["Tipo", "Marca", "Material", "Tamaño", "Color"]
+      },
+      "suplementos-deportivos": {
+        "name": "Suplementos Deportivos",
+        "attributes": ["Tipo", "Marca", "Sabor", "Presentación", "Vencimiento"]
+      },
+      "otros-deportes": {
+        "name": "Otros"
+      }
+    }
+  },
+  "aparatos-domesticos": {
+    "name": "Aparatos Domésticos",
+    "children": {
+      "cuidado-personal": {
+        "name": "Cuidado Personal",
+        "attributes": ["Tipo", "Marca", "Modelo", "Potencia"]
+      },
+      "aire-y-calefaccion": {
+        "name": "Aire y Calefacción",
+        "attributes": ["Tipo", "Marca", "Modelo", "Potencia", "Instalación"]
+      },
+      "cocina": {
+        "name": "Cocina",
+        "attributes": ["Tipo", "Marca", "Modelo", "Potencia"]
+      },
+      "agua-y-filtros": {
+        "name": "Agua y Filtros",
+        "attributes": ["Tipo", "Marca", "Modelo", "Capacidad"]
+      },
+      "limpieza": {
+        "name": "Limpieza",
+        "attributes": ["Tipo", "Marca", "Modelo", "Potencia"]
+      },
+      "pequenos-aparatos": {
+        "name": "Pequeños Aparatos",
+        "attributes": ["Tipo", "Marca", "Modelo", "Potencia"]
+      },
+      "frio": {
+        "name": "Frío",
+        "attributes": ["Tipo", "Marca", "Modelo", "Capacidad"]
+      },
+      "otros-aparatos": {
+        "name": "Otros"
+      }
+    }
+  },
+  "tecnologia-y-entretenimiento": {
+    "name": "Tecnología y Entretenimiento",
+    "children": {
+      "accesorios-audio-video": {
+        "name": "Accesorios Audio y Video",
+        "attributes": ["Tipo", "Marca", "Modelo", "Compatibilidad"]
+      },
+      "accesorios-television": {
+        "name": "Accesorios Televisión",
+        "attributes": ["Tipo", "Marca", "Modelo", "Compatibilidad"]
+      },
+      "sonido": {
+        "name": "Sonido",
+        "attributes": ["Tipo", "Marca", "Modelo", "Potencia"]
+      },
+      "conectores": {
+        "name": "Conectores",
+        "attributes": ["Tipo", "Marca", "Modelo", "Compatibilidad"]
+      },
+      "partes-electronicas": {
+        "name": "Partes Electrónicas",
+        "attributes": ["Tipo", "Marca", "Modelo", "Compatibilidad"]
+      },
+      "mandos": {
+        
+        "name": "Mandos",
+        "attributes": ["Tipo", "Marca", "Modelo", "Compatibilidad"]
+      },
+      "drones-entretenimiento": {
+        "name": "Drones",
+        "attributes": ["Tipo", "Marca", "Modelo", "Alcance"]
+      },
+      "fundas-y-mochilas": {
+        "name": "Fundas y Mochilas",
+        "attributes": ["Tipo", "Marca", "Material", "Tamaño", "Compatibilidad"]
+      },
+      "contenido-digital": {
+        "name": "Contenido Digital",
+        "attributes": ["Tipo", "Formato", "Duración", "Calidad", "Plataforma"]
+      },
+      "baterias-electronicas": {
+        "name": "Baterías",
+        "attributes": ["Tipo", "Marca", "Modelo", "Capacidad", "Compatibilidad"]
+      },
+      "proyectores-entretenimiento": {
+        "name": "Proyectores",
+        "attributes": ["Tipo", "Marca", "Modelo", "Resolución"]
+      },
+      "repuestos-television": {
+        "name": "Repuestos Televisión",
+        "attributes": ["Tipo", "Marca", "Modelo", "Compatibilidad"]
+      },
+      "televisores": {
+        "name": "Televisores",
+        "attributes": ["Tipo", "Marca", "Modelo", "Tamaño"]
+      },
+      "video": {
+        "name": "Video",
+        "attributes": ["Tipo", "Marca", "Modelo", "Resolución"]
+      },
+      "otros-tecnologia-entretenimiento": {
+        "name": "Otros"
+      }
+    }
+  },
+  "belleza-y-cuidado": {
+    "name": "Belleza y Cuidado",
+    "children": {
+      "aparatos-cabello": {
+        "name": "Aparatos para Cabello",
+        "attributes": ["Tipo", "Marca", "Modelo", "Potencia"]
+      },
+      "productos-peluqueria": {
+        "name": "Productos de Peluquería",
+        "attributes": ["Tipo", "Marca", "Modelo", "Volumen"]
+      },
+      "cuidado-barba": {
+        "name": "Cuidado de Barba",
+        "attributes": ["Tipo", "Marca", "Modelo", "Volumen"]
+      },
+      "cuidado-piel": {
+        "name": "Cuidado de Piel",
+        "attributes": ["Tipo", "Marca", "Modelo", "Volumen"]
+      },
+      "cuidado-cabello": {
+        "name": "Cuidado de Cabello",
+        "attributes": ["Tipo", "Marca", "Modelo", "Volumen"]
+      },
+      "eliminacion-vello": {
+        "name": "Eliminación de Vello",
+        "attributes": ["Tipo", "Marca", "Modelo", "Potencia"]
+      },
+      "medicamentos": {
+        "name": "Medicamentos",
+        "kyc": true,
+        "onlyCompany": true,
+        "attributes": ["Tipo", "Marca", "Modelo", "Dosis", "Vencimiento"]
+      },
+      "higiene": {
+        "name": "Higiene",
+        "attributes": ["Tipo", "Marca", "Modelo", "Volumen"]
+      },
+      "cuidado-unas": {
+        "name": "Cuidado de Uñas",
+        "attributes": ["Tipo", "Marca", "Modelo", "Volumen"]
+      },
+      "cosmeticos": {
+        "name": "Cosméticos",
+        "attributes": ["Tipo", "Marca", "Modelo", "Volumen"]
+      },
+      "fragancias": {
+        "name": "Fragancias",
+        "attributes": ["Tipo", "Marca", "Modelo", "Volumen"]
+      },
+      "salud": {
+        "name": "Salud",
+        "attributes": ["Tipo", "Marca", "Modelo", "Dosis"]
+      },
+      "tratamientos-belleza": {
+        "name": "Tratamientos de Belleza",
+        "attributes": ["Tipo", "Marca", "Modelo", "Duración"]
+      },
+      "otros-belleza": {
+        "name": "Otros"
+      }
+    }
+  },
+  "equipos-y-utensilios": {
+    "name": "Equipos y Utensilios",
+    "children": {
+      "accesorios-herramientas": {
+        "name": "Accesorios para Herramientas",
+        "attributes": ["Tipo", "Marca", "Modelo", "Compatibilidad"]
+      },
+      "organizadores": {
+        "name": "Organizadores",
+        "attributes": ["Tipo", "Marca", "Modelo", "Tamaño"]
+      },
+      "herramientas-electricas": {
+        "name": "Herramientas Eléctricas",
+        "attributes": ["Tipo", "Marca", "Modelo", "Potencia"]
+      },
+      "herramientas-industriales": {
+        "name": "Herramientas Industriales",
+        "attributes": ["Tipo", "Marca", "Modelo", "Potencia"]
+      },
+      "herramientas-manuales": {
+        "name": "Herramientas Manuales",
+        "attributes": ["Tipo", "Marca", "Modelo", "Material"]
+      },
+      "herramientas-neumaticas": {
+        "name": "Herramientas Neumáticas",
+        "attributes": ["Tipo", "Marca", "Modelo", "Presión"]
+      },
+      "herramientas-jardin": {
+        "name": "Herramientas para Jardín",
+        "attributes": ["Tipo", "Marca", "Modelo", "Material"]
+      },
+      "medicion-y-pruebas": {
+        "name": "Medición y Pruebas",
+        "attributes": ["Tipo", "Marca", "Modelo", "Precisión"]
+      },
+      "otros-equipos": {
+        "name": "Otros"
+      }
+    }
+  },
+  "casa-y-mobiliario": {
+    "name": "Casa y Mobiliario",
+    "children": {
+      "decoracion": {
+        "name": "Decoración",
+        "attributes": ["Tipo", "Marca", "Modelo", "Material"]
+      },
+      "sanitarios": {
+        "name": "Sanitarios",
+        "attributes": ["Tipo", "Marca", "Modelo", "Material"]
+      },
+      "dormitorio": {
+        "name": "Dormitorio",
+        "attributes": ["Tipo", "Marca", "Modelo", "Material"]
+      },
+      "cocina-mobiliario": {
+        "name": "Cocina",
+        "attributes": ["Tipo", "Marca", "Modelo", "Material"]
+      },
+      "limpieza-casa": {
+        "name": "Limpieza de Casa",
+        "attributes": ["Tipo", "Marca", "Modelo", "Volumen"]
+      },
+      "iluminacion": {
+        "name": "Iluminación",
+        "attributes": ["Tipo", "Marca", "Modelo", "Potencia"]
+      },
+      "exterior": {
+        "name": "Exterior",
+        "attributes": ["Tipo", "Marca", "Modelo", "Material"]
+      },
+      "muebles": {
+        "name": "Muebles",
+        "attributes": ["Tipo", "Marca", "Modelo", "Material"]
+      },
+      "organizacion": {
+        "name": "Organización",
+        "attributes": ["Tipo", "Marca", "Modelo", "Tamaño"]
+      },
+      "seguridad": {
+        "name": "Seguridad",
+        "attributes": ["Tipo", "Marca", "Modelo", "Alcance"]
+      },
+      "textiles": {
+        "name": "Textiles",
+        "attributes": ["Tipo", "Marca", "Modelo", "Material"]
+      },
+      "otros-casa": {
+        "name": "Otros"
+      }
+    }
+  },
+  "comercio-e-industria": {
+    "name": "Comercio e Industria",
+    "children": {
+      "diseno-y-arquitectura": {
+        "name": "Diseño y Arquitectura",
+        "attributes": ["Tipo", "Marca", "Modelo", "Especialidad"]
+      },
+      "empaque-y-transporte": {
+        "name": "Empaque y Transporte",
+        "attributes": ["Tipo", "Marca", "Modelo", "Tamaño"]
+      },
+      "equipos-medicos": {
+        "name": "Equipos Médicos",
+        "attributes": ["Tipo", "Marca", "Modelo", "Especialidad"]
+      },
+      "equipos-comercio": {
+        "name": "Equipos para Comercio",
+        "attributes": ["Tipo", "Marca", "Modelo", "Función"]
+      },
+      "equipos-oficina": {
+        "name": "Equipos para Oficina",
+        "attributes": ["Tipo", "Marca", "Modelo", "Función"]
+      },
+      "restaurantes-y-hoteles": {
+        "name": "Restaurantes y Hoteles",
+        "attributes": ["Tipo", "Marca", "Modelo", "Capacidad"]
+      },
+      "herramientas-industriales-comercio": {
+        "name": "Herramientas Industriales",
+        "attributes": ["Tipo", "Marca", "Modelo", "Potencia"]
+      },
+      "seguridad-trabajo": {
+        "name": "Seguridad en el Trabajo",
+        "attributes": ["Tipo", "Marca", "Modelo", "Protección"]
+      },
+      "ropa-y-zapatos": {
+        "name": "Ropa y Zapatos",
+        "attributes": ["Tipo", "Marca", "Modelo", "Talla"]
+      },
+      "uniformes": {
+        "name": "Uniformes",
+        "attributes": ["Tipo", "Marca", "Modelo", "Talla"]
+      },
+      "otros-comercio": {
+        "name": "Otros"
+      }
+    }
+  },
+  "propiedades": {
+    "name": "Propiedades",
+    "children": {
+      "acciones-club": {
+        "name": "Acciones de Club",
+        "attributes": ["Tipo", "Valor"]
+      },
+      "anexos": {
+        "name": "Anexos",
+        "attributes": ["Tipo", "Tamaño"]
+      },
+      "apartamentos": {
+        "name": "Apartamentos",
+        "attributes": ["Tipo", "Habitaciones"]
+      },
+      "casas": {
+        "name": "Casas",
+        "attributes": ["Tipo", "Habitaciones"]
+      },
+      "edificios": {
+        "name": "Edificios",
+        "attributes": ["Tipo", "Pisos"]
+      },
+      "almacenes": {
+        "name": "Almacenes",
+        "attributes": ["Tipo", "Tamaño"]
+      },
+      "habitaciones": {
+        "name": "Habitaciones",
+        "attributes": ["Tipo", "Tamaño"]
+      },
+      "fincas": {
+        "name": "Fincas",
+        "attributes": ["Tipo", "Tamaño"]
+      },
+      "hoteles": {
+        "name": "Hoteles",
+        "attributes": ["Tipo", "Habitaciones"]
+      },
+      "locales": {
+        "name": "Locales",
+        "attributes": ["Tipo", "Tamaño"]
+      },
+      "negocios": {
+        "name": "Negocios",
+        "attributes": ["Tipo", "Tamaño"]
+      },
+      "oficinas": {
+        "name": "Oficinas",
+        "attributes": ["Tipo", "Tamaño"]
+      },
+      "cementerio": {
+        "name": "Cementerio",
+        "attributes": ["Tipo", "Tamaño"]
+      },
+      "terrenos": {
+        "name": "Terrenos",
+        "attributes": ["Tipo", "Tamaño"]
+      },
+      "casas-adosadas": {
+        "name": "Casas Adosadas",
+        "attributes": ["Tipo", "Habitaciones"]
+      }
+    }
+  },
+  "musica": {
+    "name": "Música",
+    "children": {
+      "baterias": {
+        "name": "Baterías",
+        "attributes": ["Tipo", "Marca", "Modelo", "Material"]
+      },
+      "cornetas": {
+        "name": "Cornetas",
+        "attributes": ["Tipo", "Marca", "Modelo", "Potencia"]
+      },
+      "equipos-dj": {
+        "name": "Equipos de DJ",
+        "attributes": ["Tipo", "Marca", "Modelo", "Función"]
+      },
+      "grabacion": {
+        "name": "Grabación",
+        "attributes": ["Tipo", "Marca", "Modelo", "Función"]
+      },
+      "estudio-de-grabacion": {
+        "name": "Estudio de Grabación",
+        "attributes": ["Tipo", "Marca", "Modelo", "Equipamiento"]
+      },
+      "instrumentos-de-cuerdas": {
+        "name": "Instrumentos de Cuerdas",
+        "attributes": ["Tipo", "Marca", "Modelo", "Material"]
+      },
+      "instrumentos-de-viento": {
+        "name": "Instrumentos de Viento",
+        "attributes": ["Tipo", "Marca", "Modelo", "Material"]
+      },
+      "metronomos": {
+        "name": "Metrónomos",
+        "attributes": ["Tipo", "Marca", "Modelo", "Función"]
+      },
+      "microfonos-y-amplificadores": {
+        "name": "Micrófonos y Amplificadores",
+        "attributes": ["Tipo", "Marca", "Modelo", "Potencia"]
+      },
+      "partituras-y-letras": {
+        "name": "Partituras y Letras",
+        "attributes": ["Tipo", "Autor", "Género", "Formato"]
+      },
+      "pedaleras-y-accesorios": {
+        "name": "Pedaleras y Accesorios",
+        "attributes": ["Tipo", "Marca", "Modelo", "Función"]
+      },
+      "teclados-y-pianos": {
+        "name": "Teclados y Pianos",
+        "attributes": ["Tipo", "Marca", "Modelo", "Teclas"]
+      },
+      "otros-instrumentos-musicales": {
+        "name": "Otros"
+      }
+    }
+  },
+  "juegos-y-juguetes": {
+    "name": "Juegos y Juguetes",
+    "children": {
+      "arte-y-manualidades-juegos": {
+        "name": "Arte y Manualidades",
+        "attributes": ["Tipo", "Marca", "Modelo", "Material"]
+      },
+      "barajitas-albumes-y-cromos": {
+        "name": "Barajitas, Álbumes y Cromos",
+        "attributes": ["Tipo", "Marca", "Serie", "Colección"]
+      },
+      "casas-y-carpas-para-ninos": {
+        "name": "Casas y Carpas para Niños",
+        "attributes": ["Tipo", "Marca", "Modelo", "Tamaño"]
+      },
+      "electronicos-para-ninos": {
+        "name": "Electrónicos para Niños",
+        "attributes": ["Tipo", "Marca", "Modelo", "Edad"]
+      },
+      "hobbies": {
+        "name": "Hobbies",
+        "attributes": ["Tipo", "Marca", "Modelo", "Categoría"]
+      },
+      "instrumentos-musicales-juguetes": {
+        "name": "Instrumentos Musicales",
+        "attributes": ["Tipo", "Marca", "Modelo", "Material"]
+      },
+      "juegos-de-agua-y-playa": {
+        "name": "Juegos de Agua y Playa",
+        "attributes": ["Tipo", "Marca", "Modelo", "Tamaño"]
+      },
+      "juegos-de-construccion": {
+        "name": "Juegos de Construcción",
+        "attributes": ["Tipo", "Marca", "Modelo", "Piezas"]
+      },
+      "juegos-de-mesa-y-cartas": {
+        "name": "Juegos de Mesa y Cartas",
+        "attributes": ["Tipo", "Marca", "Modelo", "Jugadores"]
+      },
+      "juegos-de-parque-y-aire-libre": {
+        "name": "Juegos de Parque y Aire Libre",
+        "attributes": ["Tipo", "Marca", "Modelo", "Tamaño"]
+      },
+      "juegos-de-salon": {
+        "name": "Juegos de Salón",
+        "attributes": ["Tipo", "Marca", "Modelo", "Jugadores"]
+      },
+      "juguetes-antiestres-e-ingenio": {
+        "name": "Juguetes Antiestrés e Ingenio",
+        "attributes": ["Tipo", "Marca", "Modelo", "Función"]
+      },
+      "juguetes-de-bromas": {
+        "name": "Juguetes de Bromas",
+        "attributes": ["Tipo", "Marca", "Modelo", "Función"]
+      },
+      "juguetes-de-oficios": {
+        "name": "Juguetes de Oficios",
+        "attributes": ["Tipo", "Marca", "Modelo", "Oficio"]
+      },
+      "juguetes-para-bebes-juegos": {
+        "name": "Juguetes para Bebés",
+        "attributes": ["Tipo", "Marca", "Modelo", "Edad"]
+      },
+      "mesas-y-sillas": {
+        "name": "Mesas y Sillas",
+        "attributes": ["Tipo", "Marca", "Modelo", "Material"]
+      },
+      "munecos-y-munecas": {
+        "name": "Muñecos y Muñecas",
+        "attributes": ["Tipo", "Marca", "Modelo", "Material"]
+      },
+      "patines-y-patinetas": {
+        "name": "Patines y Patinetas",
+        "attributes": ["Tipo", "Marca", "Modelo", "Tamaño"]
+      },
+      "peloteros-e-inflables": {
+        "name": "Peloteros e Inflables",
+        "attributes": ["Tipo", "Marca", "Modelo", "Tamaño"]
+      },
+      "peluches": {
+        "name": "Peluches",
+        "attributes": ["Tipo", "Marca", "Modelo", "Material"]
+      },
+      "titeres-y-marionetas": {
+        "name": "Títeres y Marionetas",
+        "attributes": ["Tipo", "Marca", "Modelo", "Material"]
+      },
+      "vehiculos-montables-para-ninos": {
+        "name": "Vehículos Montables para Niños",
+        "attributes": ["Tipo", "Marca", "Modelo", "Edad"]
+      },
+      "vehiculos-de-juguete": {
+        "name": "Vehículos de Juguete",
+        "attributes": ["Tipo", "Marca", "Modelo", "Escala"]
+      },
+      "otros-juegos-juguetes": {
+        "name": "Otros"
+      }
+    }
+  },
+  "libros-revistas-y-comics": {
+    "name": "Libros, Revistas y Comics",
+    "children": {
+      "catalogos": {
+        "name": "Catálogos",
+        "attributes": ["Tipo", "Marca", "Categoría"]
+      },
+      "ebooks": {
+        "name": "Ebooks & Audiobooks",
+        "kyc": true,
+        "onlyCompany": true,
+        "attributes": ["Tipo", "Formato", "Género"]
+      },
+      "libros-fisicos": {
+        "name": "Libros Físicos",
+        "attributes": ["Tipo", "Autor", "Género"]
+      },
+      "revistas": {
+        "name": "Revistas",
+        "attributes": ["Tipo", "Editorial", "Categoría"]
+      },
+      "otros-libros-revistas-comics": {
+        "name": "Otros"
+      }
+    }
+  },
+  "peliculas-y-series": {
+    "name": "Películas y Series",
+    "children": {
+      "contenido-deportivo": {
+        "name": "Contenido Deportivo",
+        "attributes": ["Tipo", "Deporte", "Formato"]
+      },
+      "cursos-completos": {
+        "name": "Cursos Completos",
+        "attributes": ["Tipo", "Instructor", "Duración"]
+      },
+      "peliculas-fisicas": {
+        "name": "Películas Físicas",
+        "attributes": ["Tipo", "Director", "Género", "Formato"]
+      },
+      "series-de-tv-y-telenovelas-fisicas": {
+        "name": "Series de TV y Telenovelas Físicas",
+        "attributes": ["Tipo", "Canal", "Género", "Formato"]
+      },
+      "videos-de-recetas-y-diy": {
+        "name": "Videos de Recetas y DIY",
+        "attributes": ["Tipo", "Creador", "Categoría"]
+      },
+      "otros-musica-peliculas-series": {
+        "name": "Otros"
+      }
+    }
+  },
+  "recuerdos-cotillon-y-fiestas": {
+    "name": "Recuerdos, Cotillón y Fiestas",
+    "children": {
+      "botellas": {
+        "name": "Botellas",
+        "attributes": ["Tipo", "Marca", "Material"]
+      },
+      "cotillon": {
+        "name": "Cotillón",
+        "attributes": ["Tipo", "Marca", "Cantidad"]
+      },
+      "decoracion-para-fiestas": {
+        "name": "Decoración para Fiestas",
+        "attributes": ["Tipo", "Marca", "Tema"]
+      },
+      "desechables-para-fiestas": {
+        "name": "Desechables para Fiestas",
+        "attributes": ["Tipo", "Marca", "Material"]
+      },
+      "disfraces-y-cosplay": {
+        "name": "Disfraces y Cosplay",
+        "attributes": ["Tipo", "Marca", "Talla"]
+      },
+      "equipamiento-para-fiestas": {
+        "name": "Equipamiento para Fiestas",
+        "attributes": ["Tipo", "Marca", "Potencia"]
+      },
+      "espuma-serpentina-y-confeti": {
+        "name": "Espuma, Serpentina y Confeti",
+        "attributes": ["Tipo", "Marca", "Color"]
+      },
+      "invitaciones": {
+        "name": "Invitaciones",
+        "attributes": ["Tipo", "Diseño", "Cantidad"]
+      },
+      "kits-imprimibles-para-fiestas": {
+        "name": "Kits Imprimibles para Fiestas",
+        "attributes": ["Tipo", "Diseño", "Cantidad"]
+      },
+      "props-para-photo-booths": {
+        "name": "Props para Photo Booths",
+        "attributes": ["Tipo", "Marca", "Tema"]
+      },
+      "recuerdos-para-fiestas": {
+        "name": "Recuerdos para Fiestas",
+        "attributes": ["Tipo", "Marca", "Personalización"]
+      },
+      "regalos-y-recuerdos": {
+        "name": "Regalos y Recuerdos",
+        "attributes": ["Tipo", "Marca", "Personalización"]
+      },
+      "otros-cotillon-fiestas": {
+        "name": "Otros"
+      }
+    }
+  },
+  "relojes-joyas-y-bisuteria": {
+    "name": "Relojes, Joyas y Bisutería",
+    "children": {
+      "exhibidores-y-joyeros": {
+        "name": "Exhibidores y Joyeros",
+        "attributes": ["Tipo", "Marca", "Material"]
+      },
+      "insumos-para-joyeria": {
+        "name": "Insumos para Joyería",
+        "attributes": ["Tipo", "Marca", "Material"]
+      },
+      "joyeria-y-bisuteria": {
+        "name": "Joyería y Bisutería",
+        "attributes": ["Tipo", "Marca", "Material"]
+      },
+      "piedra-preciosa-y-semipreciosa": {
+        "name": "Piedra Preciosa y Semipreciosa",
+        "attributes": ["Tipo", "Marca", "Quilates"]
+      },
+      "piercings": {
+        "name": "Piercings",
+        "attributes": ["Tipo", "Marca", "Material"]
+      },
+      "plumas-y-lapiceras-de-lujo": {
+        "name": "Plumas y Lapiceras de Lujo",
+        "attributes": ["Tipo", "Marca", "Material"]
+      },
+      "relojes": {
+        "name": "Relojes",
+        "attributes": ["Tipo", "Marca", "Modelo"]
+      },
+      "repuestos-para-relojes": {
+        "name": "Repuestos para Relojes",
+        "attributes": ["Tipo", "Marca", "Modelo"]
+      },
+      "otros-relojes-joyas-bisuteria": {
+        "name": "Otros"
+      }
+    }
+  },
+  "ropa-zapatos-y-accesorios": {
+    "name": "Ropa, Zapatos y Accesorios",
+    "children": {
+      "abrigos": {
+        "name": "Abrigos",
+        "attributes": ["Tipo", "Marca", "Talla"]
+      },
+      "accesorios-de-moda": {
+        "name": "Accesorios de Moda",
+        "attributes": ["Tipo", "Marca", "Material"]
+      },
+      "blusas": {
+        "name": "Blusas",
+        "attributes": ["Tipo", "Marca", "Talla"]
+      },
+      "calzado": {
+        "name": "Calzado",
+        "attributes": ["Tipo", "Marca", "Talla"]
+      },
+      "camisas": {
+        "name": "Camisas",
+        "attributes": ["Tipo", "Marca", "Talla"]
+      },
+      "enteritos": {
+        "name": "Enteritos",
+        "attributes": ["Tipo", "Marca", "Talla"]
+      },
+      "equipaje-y-bolsos": {
+        "name": "Equipaje y Bolsos",
+        "attributes": ["Tipo", "Marca", "Material"]
+      },
+      "faldas": {
+        "name": "Faldas",
+        "attributes": ["Tipo", "Marca", "Talla"]
+      },
+      "franelas-y-chemises": {
+        "name": "Franelas y Chemises",
+        "attributes": ["Tipo", "Marca", "Talla"]
+      },
+      "indumentaria-laboral-y-escolar": {
+        "name": "Indumentaria Laboral y Escolar",
+        "attributes": ["Tipo", "Marca", "Talla"]
+      },
+      "kimonos": {
+        "name": "Kimonos",
+        "attributes": ["Tipo", "Marca", "Talla"]
+      },
+      "leggings": {
+        "name": "Leggings",
+        "attributes": ["Tipo", "Marca", "Talla"]
+      },
+      "lotes-de-ropa": {
+        "name": "Lotes de Ropa",
+        "attributes": ["Tipo", "Marca", "Cantidad"]
+      },
+      "pantalones": {
+        "name": "Pantalones",
+        "attributes": ["Tipo", "Marca", "Talla"]
+      },
+      "ropa-deportiva-ropa": {
+        "name": "Ropa Deportiva",
+        "attributes": ["Tipo", "Marca", "Talla"]
+      },
+      "ropa-interior-y-de-dormir": {
+        "name": "Ropa Interior y de Dormir",
+        "only18": true,
+        "attributes": ["Tipo", "Marca", "Talla"]
+      },
+      "ropa-para-bebes-ropa": {
+        "name": "Ropa para Bebés",
+        "attributes": ["Tipo", "Marca", "Talla"]
+      },
+      "shorts-y-bermudas": {
+        "name": "Shorts y Bermudas",
+        "attributes": ["Tipo", "Marca", "Talla"]
+      },
+      "trajes": {
+        "name": "Trajes",
+        "attributes": ["Tipo", "Marca", "Talla"]
+      },
+      "trajes-de-bano": {
+        "name": "Trajes de Baño",
+        "attributes": ["Tipo", "Marca", "Talla"]
+      },
+      "vestidos": {
+        "name": "Vestidos",
+        "attributes": ["Tipo", "Marca", "Talla"]
+      },
+      "otros-ropa-zapatos-accesorios": {
+        "name": "Otros"
+      }
+    }
+  },
+  "servicios": {
+    "name": "Servicios",
+    "isService": true,
+    "children": {
+      "abogados-y-asesoria-legal": {
+        "name": "Abogados y Asesoría Legal",
+        "isService": true,
+        "attributes": ["Tipo", "Especialidad"]
+      },
+      "belleza-e-higiene-personal": {
+        "name": "Belleza e Higiene Personal",
+        "isService": true,
+        "attributes": ["Tipo", "Especialidad"]
+      },
+      "cursos-y-clases": {
+        "name": "Cursos y Clases",
+        "isService": true,
+        "attributes": ["Tipo", "Modalidad", "Duración"]
+      },
+      "desarrollo-y-programacion": {
+        "name": "Desarrollo y Programación",
+        "isService": true
+      },
+      "diseño-grafico-y-multimedia": {
+        "name": "Diseño Gráfico y Multimedia",
+        "isService": true
+      },
+      "fiestas-y-eventos": {
+        "name": "Fiestas y Eventos",
+        "isService": true
+      },
+      "servicios-fotografia-y-video": {
+        "name": "Fotografía y Video",
+        "isService": true
+      },
+      "freelancers-y-trabajo-remoto": {
+        "name": "Freelancers y Trabajo Remoto",
+        "isService": true
+      },
+      "gastronomia": {
+        "name": "Gastronomía",
+        "isService": true
+      },
+      "hogar": {
+        "name": "Hogar",
+        "isService": true
+      },
+      "imprenta-y-publicidad": {
+        "name": "Imprenta y Publicidad",
+        "isService": true
+      },
+      "mantenimiento-de-vehiculos": {
+        "name": "Mantenimiento de Vehículos",
+        "isService": true,
+        "attributes": ["Especialidad"]
+      },
+      "marketing-digital-y-redes-sociales": {
+        "name": "Marketing Digital y Redes Sociales",
+        "isService": true
+      },
+      "medicos-y-salud": {
+        "name": "Médicos y Salud",
+        "isService": true,
+        "attributes": ["Especialidad"]
+      },
+      "profesionales": {
+        "name": "Profesionales",
+        "isService": true,
+        "attributes": ["Especialidad"]
+      },
+      "reparaciones-e-instalaciones": {
+        "name": "Reparaciones e Instalaciones",
+        "isService": true,
+        "attributes": ["Especialidad"]
+      },
+      "ropa-y-moda": {
+        "name": "Ropa y Moda",
+        "isService": true
+      },
+      "servicios-para-mascotas": {
+        "name": "Servicios para Mascotas",
+        "isService": true
+      },
+      "transporte": {
+        "name": "Transporte",
+        "isService": true
+      },
+      "viajes-y-turismo": {
+        "name": "Viajes y Turismo",
+        "isService": true
+      },
+      "youtubers-y-creadores-contenido": {
+        "name": "Youtubers y Creadores de Contenido",
+        "isService": true
+      },
+      "otros-servicios": {
+        "name": "Otros Servicios",
+        "isService": true
+      }
+    }
+  },
+  "juguetes-sexuales-y-para-adultos": {
+    "name": "Juguetes Sexuales y para Adultos",
+    "only18": true,
+    "children": {
+      "vibradores": {
+        "name": "Vibradores",
+        "only18": true,
+        "attributes": ["Tipo", "Marca", "Modelo", "Material"]
+      },
+      "consoladores": {
+        "name": "Consoladores",
+        "only18": true,
+        "attributes": ["Tipo", "Marca", "Modelo", "Material"]
+      },
+      "estimuladores-clitorianos": {
+        "name": "Estimuladores Clitorianos",
+        "only18": true,
+        "attributes": ["Tipo", "Marca", "Modelo", "Material"]
+      },
+      "estimuladores-prostaticos": {
+        "name": "Estimuladores Prostáticos",
+        "only18": true,
+        "attributes": ["Tipo", "Marca", "Modelo", "Material"]
+      },
+      "anillos-vibradores": {
+        "name": "Anillos Vibradores",
+        "only18": true,
+        "attributes": ["Tipo", "Marca", "Modelo", "Tamaño"]
+      },
+      "juguetes-anales": {
+        "name": "Juguetes Anales",
+        "only18": true,
+        "attributes": ["Tipo", "Marca", "Modelo", "Material", "Tamaño"]
+      },
+      "fetiches-y-bondage": {
+        "name": "Fetiches y Bondage",
+        "only18": true,
+        "attributes": ["Tipo", "Marca", "Material", "Tamaño"]
+      },
+      "lubricantes": {
+        "name": "Lubricantes",
+        "only18": true,
+        "attributes": ["Tipo", "Marca", "Volumen", "Vencimiento"]
+      },
+      "preservativos": {
+        "name": "Preservativos",
+        "only18": true,
+        "attributes": ["Tipo", "Marca", "Tamaño", "Vencimiento"]
+      },
+      "lenceria-erotica": {
+        "name": "Lencería Erótica",
+        "only18": true,
+        "attributes": ["Tipo", "Marca", "Talla", "Color", "Material"]
+      },
+      "cosplay-y-disfraces": {
+        "name": "Cosplay y Disfraces",
+        "only18": true,
+        "attributes": ["Tipo", "Marca", "Talla", "Color", "Material"]
+      },
+      "juegos-de-pareja": {
+        "name": "Juegos de Pareja",
+        "only18": true,
+        "attributes": ["Tipo", "Marca", "Jugadores"]
+      },
+      "accesorios-eroticos": {
+        "name": "Accesorios Eróticos",
+        "only18": true,
+        "attributes": ["Tipo", "Marca", "Material", "Tamaño"]
+      },
+      "estimuladores-de-pezones": {
+        "name": "Estimuladores de Pezones",
+        "only18": true,
+        "attributes": ["Tipo", "Marca", "Material"]
+      },
+      "masajeadores": {
+        "name": "Masajeadores",
+        "only18": true,
+        "attributes": ["Tipo", "Marca", "Modelo", "Potencia"]
+      },
+      "otros-juguetes-sexuales": {
+        "name": "Otros Juguetes Sexuales",
+        "only18": true,
+        "attributes": ["Tipo", "Marca", "Material"]
+      }
+    }
+  },
+  "otras-categorias": {
+    "name": "Otras Categorías",
+    "children": {
+      "articulos-para-fumadores": {
+        "name": "Artículos para Fumadores",
+        "only18": true,
+        "kyc": true,
+        "attributes": ["Tipo", "Marca", "Material"]
+      },
+      "esoterismo": {
+        "name": "Esoterismo",
+        "attributes": ["Tipo", "Categoría", "Material"]
+      },
+      "eventos-y-conciertos": {
+        "name": "Eventos y Conciertos",
+        "attributes": ["Tipo", "Fecha"]
+      },
+      "insumos-para-tatuajes": {
+        "name": "Tatuajes y Insumos para Tatuajes",
+        "only18": true,
+        "kyc": true,
+        "attributes": ["Tipo", "Marca", "Material", "Color"]
+      },
+      "otros": {
+        "name": "Otros"
+      }
+    }
+  }
+}

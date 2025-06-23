@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{.Title}}</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            100: '#fef3e2',
+                            500: '#fc8b06',
+                            600: '#e67c05',
+                            700: '#cc6d04',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gray-50">
+    {{template "header" .}}
+    
+    <main>
+        {{if eq .PageTemplate "home-content"}}
+            {{template "home-content" .}}
+        {{else if eq .PageTemplate "product-content"}}
+            {{template "product-content" .}}
+        {{else if eq .PageTemplate "category-content"}}
+            {{template "category-content" .}}
+        {{else if eq .PageTemplate "checkout-content"}}
+            {{template "checkout-content" .}}
+        {{else}}
+            <div>PageTemplate: "{{.PageTemplate}}" not matched</div>
+        {{end}}
+    </main>
+    
+    {{template "footer" .}}
+</body>
+</html> 
