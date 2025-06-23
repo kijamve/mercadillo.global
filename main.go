@@ -313,25 +313,23 @@ func getEnrichedProduct(c echo.Context, productId string) models.EnrichedProduct
 
 	// Obtener la categoría primaria del producto
 	var primaryCategory *models.Category
+	allCategories := make(map[string]*models.Category)
 
 	for _, pc := range product.ProductCategories {
 		category := models.GetCategoryByID(pc.CategoryID)
-		if category != nil && pc.IsPrimary {
-			primaryCategory = category
-			break
+		if category != nil {
+			allCategories[pc.CategoryID] = category
+			if pc.IsPrimary {
+				primaryCategory = category
+			}
 		}
 	}
 
-	var allCategories map[string]*models.Category
-
 	// Si no hay categoría primaria, usar la primera disponible
-	if primaryCategory == nil && len(product.ProductCategories) > 0 {
-		category := models.GetCategoryByID(product.ProductCategories[0].CategoryID)
-		if category != nil {
+	if primaryCategory == nil && len(allCategories) > 0 {
+		for _, category := range allCategories {
 			primaryCategory = category
-		}
-		for _, category := range product.ProductCategories {
-			allCategories[category.CategoryID] = models.GetCategoryByID(category.CategoryID)
+			break
 		}
 	}
 

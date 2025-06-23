@@ -239,13 +239,13 @@ func GetProductWithWarehouses(db *gorm.DB, productID string) (*EnrichedProduct, 
 	}
 
 	// Cargar las categorías desde el sistema de categorías global
-	var allCategories []Category
+	var allCategories map[string]*Category
 	var primaryCategory *Category
 
 	for _, pc := range product.ProductCategories {
 		category := GetCategoryByID(pc.CategoryID)
 		if category != nil {
-			allCategories = append(allCategories, *category)
+			allCategories[pc.CategoryID] = category
 
 			// Si es la categoría primaria, guardarla por separado
 			if pc.IsPrimary {
@@ -256,7 +256,7 @@ func GetProductWithWarehouses(db *gorm.DB, productID string) (*EnrichedProduct, 
 
 	// Si no hay categoría primaria definida pero sí hay categorías, usar la primera como primaria
 	if primaryCategory == nil && len(allCategories) > 0 {
-		primaryCategory = &allCategories[0]
+		primaryCategory = allCategories[product.ProductCategories[0].CategoryID]
 	}
 
 	enrichedProduct := &EnrichedProduct{
