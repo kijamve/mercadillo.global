@@ -60,7 +60,6 @@
         <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
             {{range .Categories}}
             <a href="/category/{{.ID}}" class="group bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300">
-                <img src="{{.Image}}" alt="{{.Name}}" class="w-full aspect-square object-cover rounded-t-lg group-hover:scale-105 transition-transform duration-300">
                 <div class="p-4 text-center">
                     <h3 class="font-semibold text-gray-800 group-hover:text-primary-500 transition-colors">{{.Name}}</h3>
                 </div>

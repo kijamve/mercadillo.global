@@ -113,12 +113,3 @@ func GetCategoryAttributes(categoryID string) []string {
 	}
 	return []string{}
 }
-
-// getCategoryName returns the name of a category by ID
-func getCategoryName(categoryID string) string {
-	category := GetCategoryByID(categoryID)
-	if category != nil {
-		return category.Name
-	}
-	return "Categoría Desconocida"
-}
