@@ -1134,7 +1134,11 @@ func GetIntParam(c echo.Context, param string, defaultValue int) int {
 
 // CursorData estructura para los datos del cursor
 type CursorData struct {
-	Timestamp string `json:"timestamp"`
+	Timestamp string   `json:"timestamp"`
+	Price     *int     `json:"price,omitempty"`   // Para ordenamiento por precio
+	Rating    *float64 `json:"rating,omitempty"`  // Para ordenamiento por rating
+	Sold      *int     `json:"sold,omitempty"`    // Para ordenamiento por ventas
+	SortBy    string   `json:"sort_by,omitempty"` // Tipo de ordenamiento usado
 }
 
 // EncryptCursor encripta un cursor usando AES-256-GCM

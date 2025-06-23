@@ -76,18 +76,18 @@ type ProductAttribute struct {
 // EnrichedProduct estructura para productos enriquecidos con datos calculados
 type EnrichedProduct struct {
 	Product
-	FormattedPrice         string             `json:"formatted_price"`
-	FormattedOriginalPrice string             `json:"formatted_original_price"`
-	Discount               int                `json:"discount"`
-	Stars                  []int              `json:"stars"`
-	RatingInt              int                `json:"rating_int"`
-	AvailableWarehouses    []ProductWarehouse `json:"available_warehouses"`
-	TotalStock             int                `json:"total_stock"`
-	TotalWeight            int                `json:"total_weight"` // en gramos
-	GlobalAttributes       []ProductAttribute `json:"global_attributes"`
-	ShippingOptions        []ShippingCost     `json:"shipping_options"`
-	PrimaryCategory        *Category          `json:"primary_category"` // La categoría principal del producto
-	AllCategories          []Category         `json:"all_categories"`   // Todas las categorías del producto
+	FormattedPrice         string               `json:"formatted_price"`
+	FormattedOriginalPrice string               `json:"formatted_original_price"`
+	Discount               int                  `json:"discount"`
+	Stars                  []int                `json:"stars"`
+	RatingInt              int                  `json:"rating_int"`
+	AvailableWarehouses    []ProductWarehouse   `json:"available_warehouses"`
+	TotalStock             int                  `json:"total_stock"`
+	TotalWeight            int                  `json:"total_weight"` // en gramos
+	GlobalAttributes       []ProductAttribute   `json:"global_attributes"`
+	ShippingOptions        []ShippingCost       `json:"shipping_options"`
+	PrimaryCategory        *Category            `json:"primary_category"` // La categoría principal del producto
+	AllCategories          map[string]*Category `json:"all_categories"`   // Todas las categorías del producto
 }
 
 // Specification struct for JSON serialization
@@ -102,6 +102,17 @@ type ProductVariation struct {
 	Value         map[string]interface{} `json:"value"`
 	WarehouseID   *string                `json:"warehouse_id,omitempty"`
 	IsGlobal      bool                   `json:"is_global"`
+}
+
+// CategoryFilters estructura para filtros de categoría
+type CategoryFilters struct {
+	PriceMin     *int   `json:"price_min,omitempty"`
+	PriceMax     *int   `json:"price_max,omitempty"`
+	Rating       *int   `json:"rating,omitempty"`
+	Reviews      *int   `json:"reviews,omitempty"`
+	Sales        *int   `json:"sales,omitempty"`
+	FreeShipping *bool  `json:"free_shipping,omitempty"`
+	SortBy       string `json:"sort_by,omitempty"`
 }
 
 // GORM Hooks
@@ -277,7 +288,7 @@ func calculateDiscount(originalPrice, price int) int {
 
 // GetProductsByCategoryCursor versión ultra-optimizada usando cursor pagination encriptado
 // Más eficiente para millones de registros que OFFSET/LIMIT
-func GetProductsByCategoryCursor(db *gorm.DB, categoryID string, encryptedCursor string, limit int) ([]Product, string, bool, error) {
+func GetProductsByCategoryCursor(db *gorm.DB, categoryID string, encryptedCursor string, limit int, filters CategoryFilters) ([]Product, string, bool, error) {
 	var products []Product
 
 	query := db.Table("products p").
@@ -285,21 +296,37 @@ func GetProductsByCategoryCursor(db *gorm.DB, categoryID string, encryptedCursor
 		Joins("INNER JOIN product_categories pc ON p.id = pc.product_id").
 		Where("pc.category_id = ? AND p.status = ?", categoryID, "active")
 
-	// Si hay cursor encriptado, desencriptarlo y usar paginación basada en cursor
+	// Desencriptar cursor si existe para obtener datos de paginación
+	var cursorData H.CursorData
 	if encryptedCursor != "" {
-		// Desencriptar cursor
-		cursorData, err := H.DecryptCursor(encryptedCursor)
-		if err != nil {
-			// Si hay error al desencriptar, ignorar cursor y empezar desde el principio
-			// En producción podrías loggear este error
-		} else if cursorData.Timestamp != "" {
-			// Usar solo el timestamp para filtrar
-			query = query.Where("p.created_at < ?", cursorData.Timestamp)
+		if decoded, err := H.DecryptCursor(encryptedCursor); err == nil {
+			cursorData = decoded
+		}
+		// Si hay error al desencriptar, cursorData permanece vacío y se inicia desde el principio
+	}
+
+	// Aplicar filtros combinando filtros de usuario y condiciones de cursor
+	query = applyCategoryFiltersWithCursor(query, filters, cursorData)
+
+	// Determinar orden basado en filtros
+	orderBy := "p.created_at DESC"
+	if filters.SortBy != "" {
+		switch filters.SortBy {
+		case "price_asc":
+			orderBy = "p.price ASC, p.created_at DESC"
+		case "price_desc":
+			orderBy = "p.price DESC, p.created_at DESC"
+		case "rating":
+			orderBy = "p.rating DESC, p.created_at DESC"
+		case "sales":
+			orderBy = "p.sold DESC, p.created_at DESC"
+		case "newest":
+			orderBy = "p.created_at DESC"
 		}
 	}
 
-	// Obtener productos ordenados solo por fecha
-	err := query.Order("p.created_at DESC").
+	// Obtener productos con orden
+	err := query.Order(orderBy).
 		Limit(limit + 1). // +1 para saber si hay más páginas
 		Find(&products).Error
 
@@ -318,9 +345,20 @@ func GetProductsByCategoryCursor(db *gorm.DB, categoryID string, encryptedCursor
 	if hasMore && len(products) > 0 {
 		lastProduct := products[len(products)-1]
 
-		// Crear datos del cursor solo con timestamp
+		// Crear datos del cursor basado en el tipo de ordenamiento
 		cursorData := H.CursorData{
 			Timestamp: lastProduct.CreatedAt.Format("2006-01-02T15:04:05Z"),
+			SortBy:    filters.SortBy,
+		}
+
+		// Agregar campo específico según el ordenamiento
+		switch filters.SortBy {
+		case "price_asc", "price_desc":
+			cursorData.Price = &lastProduct.Price
+		case "rating":
+			cursorData.Rating = &lastProduct.Rating
+		case "sales":
+			cursorData.Sold = &lastProduct.Sold
 		}
 
 		// Encriptar cursor
@@ -333,4 +371,78 @@ func GetProductsByCategoryCursor(db *gorm.DB, categoryID string, encryptedCursor
 	}
 
 	return products, nextEncryptedCursor, hasMore, nil
+}
+
+// applyCategoryFiltersWithCursor aplica filtros de categoría junto con condiciones de cursor de forma integrada
+func applyCategoryFiltersWithCursor(query *gorm.DB, filters CategoryFilters, cursorData H.CursorData) *gorm.DB {
+	// PASO 1: Aplicar SIEMPRE todos los filtros del usuario (sin importar el cursor)
+	if filters.PriceMin != nil {
+		query = query.Where("p.price >= ?", *filters.PriceMin)
+	}
+	if filters.PriceMax != nil {
+		query = query.Where("p.price <= ?", *filters.PriceMax)
+	}
+	if filters.Rating != nil {
+		query = query.Where("p.rating >= ?", *filters.Rating)
+	}
+	if filters.Reviews != nil {
+		if *filters.Reviews == 0 {
+			query = query.Where("p.review_count = 0")
+		} else {
+			query = query.Where("p.review_count >= ?", *filters.Reviews)
+		}
+	}
+	if filters.Sales != nil {
+		if *filters.Sales == 0 {
+			query = query.Where("p.sold = 0")
+		} else {
+			query = query.Where("p.sold >= ?", *filters.Sales)
+		}
+	}
+	if filters.FreeShipping != nil {
+		query = query.Where("p.free_shipping = ?", *filters.FreeShipping)
+	}
+
+	// PASO 2: Aplicar condición de cursor SOLO para paginación (AND con los filtros de arriba)
+	if cursorData.Timestamp != "" {
+		switch filters.SortBy {
+		case "price_asc":
+			if cursorData.Price != nil {
+				// Continuar desde donde quedamos: price > cursor_price OR (price = cursor_price AND created_at < cursor_timestamp)
+				query = query.Where("(p.price > ? OR (p.price = ? AND p.created_at < ?))",
+					*cursorData.Price, *cursorData.Price, cursorData.Timestamp)
+			} else {
+				query = query.Where("p.created_at < ?", cursorData.Timestamp)
+			}
+		case "price_desc":
+			if cursorData.Price != nil {
+				// Continuar desde donde quedamos: price < cursor_price OR (price = cursor_price AND created_at < cursor_timestamp)
+				query = query.Where("(p.price < ? OR (p.price = ? AND p.created_at < ?))",
+					*cursorData.Price, *cursorData.Price, cursorData.Timestamp)
+			} else {
+				query = query.Where("p.created_at < ?", cursorData.Timestamp)
+			}
+		case "rating":
+			if cursorData.Rating != nil {
+				// Continuar desde donde quedamos: rating < cursor_rating OR (rating = cursor_rating AND created_at < cursor_timestamp)
+				query = query.Where("(p.rating < ? OR (p.rating = ? AND p.created_at < ?))",
+					*cursorData.Rating, *cursorData.Rating, cursorData.Timestamp)
+			} else {
+				query = query.Where("p.created_at < ?", cursorData.Timestamp)
+			}
+		case "sales":
+			if cursorData.Sold != nil {
+				// Continuar desde donde quedamos: sold < cursor_sold OR (sold = cursor_sold AND created_at < cursor_timestamp)
+				query = query.Where("(p.sold < ? OR (p.sold = ? AND p.created_at < ?))",
+					*cursorData.Sold, *cursorData.Sold, cursorData.Timestamp)
+			} else {
+				query = query.Where("p.created_at < ?", cursorData.Timestamp)
+			}
+		default:
+			// Para ordenamiento por fecha o sin ordenamiento específico
+			query = query.Where("p.created_at < ?", cursorData.Timestamp)
+		}
+	}
+
+	return query
 }

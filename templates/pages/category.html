@@ -16,11 +16,13 @@
             <p class="text-gray-600">{{len .Products}} productos en esta página</p>
         </div>
         <div class="flex items-center space-x-4 mt-4 md:mt-0">
-            <select class="appearance-none bg-white border border-gray-300 rounded-lg px-4 py-2 pr-8 focus:outline-none focus:ring-2 focus:ring-primary-500">
-                <option>Más relevantes</option>
-                <option>Menor precio</option>
-                <option>Mayor precio</option>
-                <option>Mejor calificados</option>
+            <select name="sort" form="filtersForm" onchange="clearCursorHistory(); document.getElementById('filtersForm').submit()" class="appearance-none bg-white border border-gray-300 rounded-lg px-4 py-2 pr-8 focus:outline-none focus:ring-2 focus:ring-primary-500">
+                <option value="">Recien Publicados</option>
+                <option value="price_asc">Menor precio</option>
+                <option value="price_desc">Mayor precio</option>
+                <option value="rating">Mejor calificados</option>
+                <option value="sales">Más vendidos</option>
+                <option value="newest">Más recientes</option>
             </select>
         </div>
     </div>
@@ -36,23 +38,63 @@
                     Filtros
                 </h3>
 
+                <form method="GET" action="/category/{{.CategoryId}}" id="filtersForm" onsubmit="clearCursorHistory()">
+
                 {{range .Filters}}
                 <div class="mb-6">
                     <h4 class="font-medium mb-3">{{.Name}}</h4>
+                    {{if eq .ID "price"}}
+                    <!-- Filtro de precio especial con campos min/max -->
+                    <div class="space-y-3">
+                        <div>
+                            <label class="block text-sm text-gray-600 mb-1">Precio mínimo</label>
+                            <div class="relative">
+                                <span class="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500">$</span>
+                                <input type="number" 
+                                       name="price_min" 
+                                       placeholder="0"
+                                       class="w-full pl-8 pr-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500">
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block text-sm text-gray-600 mb-1">Precio máximo</label>
+                            <div class="relative">
+                                <span class="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500">$</span>
+                                <input type="number" 
+                                       name="price_max" 
+                                       placeholder="Sin límite"
+                                       class="w-full pl-8 pr-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500">
+                            </div>
+                        </div>
+                    </div>
+                    {{else}}
+                    <!-- Filtros normales con checkboxes -->
                     <div class="space-y-2">
                         {{range .Options}}
                         <label class="flex items-center">
-                            <input type="checkbox" class="mr-2 text-primary-500 focus:ring-primary-500">
-                            <span class="text-sm text-gray-700">{{.}}</span>
+                            <input type="radio" 
+                                   name="{{$.ID}}" 
+                                   value="{{index . 0}}"
+                                   class="mr-2 text-primary-500 focus:ring-primary-500">
+                            <span class="text-sm text-gray-700">{{index . 1}}</span>
                         </label>
                         {{end}}
                     </div>
+                    {{end}}
                 </div>
                 {{end}}
 
-                <button class="w-full bg-primary-500 text-white py-2 rounded-lg hover:bg-primary-600 transition-colors">
-                    Aplicar filtros
-                </button>
+                <div class="flex gap-2">
+                    <button type="submit" class="flex-1 bg-primary-500 text-white py-2 rounded-lg hover:bg-primary-600 transition-colors">
+                        Aplicar filtros
+                    </button>
+                    <button type="button" onclick="clearFilters()" class="px-3 py-2 text-gray-500 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
+                        </svg>
+                    </button>
+                </div>
+                </form>
             </div>
         </aside>
 
@@ -68,7 +110,7 @@
             <!-- Cursor Pagination -->
             <div class="flex justify-center items-center mt-12 space-x-4">
                 {{if .Pagination.HasPrev}}
-                    <a href="/category/{{.CategoryId}}{{if .Pagination.PrevCursor}}?cursor={{.Pagination.PrevCursor}}{{end}}" 
+                    <a href="javascript:void(0)" onclick="goToPrevPage()" rel="nofollow"
                        class="flex items-center px-4 py-2 text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors">
                         <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
@@ -89,7 +131,7 @@
                 </span>
 
                 {{if .Pagination.HasNext}}
-                    <a href="/category/{{.CategoryId}}?cursor={{.Pagination.NextCursor}}" 
+                    <a href="javascript:void(0)" onclick="goToNextPage('{{.Pagination.NextCursor}}')" rel="nofollow"
                        class="flex items-center px-4 py-2 text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors">
                         Siguiente
                         <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -120,4 +162,131 @@
         </main>
     </div>
 </div>
+
+<script>
+function clearFilters() {
+    // Limpiar todos los checkboxes
+    document.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
+        checkbox.checked = false;
+    });
+    
+    // Limpiar campos de precio
+    document.querySelectorAll('input[name="price_min"], input[name="price_max"]').forEach(input => {
+        input.value = '';
+    });
+    
+    // Limpiar historial de cursors porque los filtros cambiaron
+    clearCursorHistory();
+    
+    // Redirigir a la página sin filtros
+    window.location.href = '/category/{{.CategoryId}}';
+}
+
+// Funciones para paginación preservando filtros
+function goToNextPage(nextCursor) {
+    // Guardar el cursor actual en el historial antes de avanzar
+    const currentCursor = new URLSearchParams(window.location.search).get('cursor') || '';
+    saveCursorToHistory(currentCursor);
+    
+    const urlParams = new URLSearchParams(window.location.search);
+    urlParams.set('cursor', nextCursor);
+    window.location.href = '/category/{{.CategoryId}}?' + urlParams.toString();
+}
+
+function goToPrevPage() {
+    // Obtener el cursor anterior del historial
+    const prevCursor = getPreviousCursor();
+    const urlParams = new URLSearchParams(window.location.search);
+    
+    if (prevCursor !== null) {
+        if (prevCursor === '') {
+            urlParams.delete('cursor'); // Ir a la primera página
+        } else {
+            urlParams.set('cursor', prevCursor);
+        }
+    } else {
+        urlParams.delete('cursor'); // Fallback: ir a la primera página
+    }
+    
+    const queryString = urlParams.toString();
+    window.location.href = '/category/{{.CategoryId}}' + (queryString ? '?' + queryString : '');
+}
+
+// Gestión del historial de cursors
+function getCursorHistoryKey() {
+    const urlParams = new URLSearchParams(window.location.search);
+    // Crear una clave única basada en los filtros (sin cursor)
+    urlParams.delete('cursor');
+    return 'cursor_history_{{.CategoryId}}_' + urlParams.toString();
+}
+
+function saveCursorToHistory(cursor) {
+    const key = getCursorHistoryKey();
+    let history = JSON.parse(sessionStorage.getItem(key) || '[]');
+    
+    // Evitar duplicados consecutivos
+    if (history.length === 0 || history[history.length - 1] !== cursor) {
+        history.push(cursor);
+        // Mantener solo los últimos 10 cursors para evitar usar mucha memoria
+        if (history.length > 10) {
+            history = history.slice(-10);
+        }
+        sessionStorage.setItem(key, JSON.stringify(history));
+    }
+}
+
+function getPreviousCursor() {
+    const key = getCursorHistoryKey();
+    let history = JSON.parse(sessionStorage.getItem(key) || '[]');
+    
+    if (history.length > 0) {
+        // Remover y devolver el último cursor del historial
+        const prevCursor = history.pop();
+        sessionStorage.setItem(key, JSON.stringify(history));
+        return prevCursor;
+    }
+    
+    return null; // No hay historial
+}
+
+function clearCursorHistory() {
+    const key = getCursorHistoryKey();
+    sessionStorage.removeItem(key);
+}
+
+// Preservar valores de URL al cargar la página
+document.addEventListener('DOMContentLoaded', function() {
+    const urlParams = new URLSearchParams(window.location.search);
+    
+    // Restaurar valores de precio
+    const priceMin = urlParams.get('price_min');
+    const priceMax = urlParams.get('price_max');
+    
+    if (priceMin) {
+        const priceMinInput = document.querySelector('input[name="price_min"]');
+        if (priceMinInput) priceMinInput.value = priceMin;
+    }
+    if (priceMax) {
+        const priceMaxInput = document.querySelector('input[name="price_max"]');
+        if (priceMaxInput) priceMaxInput.value = priceMax;
+    }
+    
+    // Restaurar valor de ordenamiento
+    const sortValue = urlParams.get('sort');
+    if (sortValue) {
+        const sortSelect = document.querySelector('select[name="sort"]');
+        if (sortSelect) sortSelect.value = sortValue;
+    }
+    
+    // Restaurar radio buttons
+    urlParams.forEach((value, key) => {
+        if (key !== 'price_min' && key !== 'price_max' && key !== 'cursor' && key !== 'sort') {
+            const radio = document.querySelector(`input[name="${key}"][value="${value}"]`);
+            if (radio) {
+                radio.checked = true;
+            }
+        }
+    });
+});
+</script>
 {{end}} 

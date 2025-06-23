@@ -1,8 +1,9 @@
 package models
 
 type Filter struct {
+	ID      string
 	Name    string
-	Options []string
+	Options map[string]string
 }
 
 type Pagination struct {
