@@ -81,12 +81,29 @@ func categoryPage(c echo.Context) error {
 	clientIP := H.GetIP(c)
 	c.Logger().Info("Category page accessed from IP: ", clientIP, " for category: ", categoryId)
 
+	// Obtener parámetros para cursor pagination encriptado
+	encryptedCursor := c.QueryParam("cursor") // Cursor encriptado
+	limit := 12                               // Productos por página
+
+	// Usar únicamente cursor pagination encriptado basado en timestamp (más eficiente para millones de registros)
+	products, pagination, err := getCategoryProductsWithCursor(categoryId, encryptedCursor, limit)
+	if err != nil {
+		c.Logger().Error("Error fetching category products: ", err)
+		products = []models.EnrichedProduct{}
+		pagination = models.Pagination{
+			ItemsPerPage: limit,
+			HasNext:      false,
+			HasPrev:      false,
+		}
+	}
+
 	data := models.CategoryPageData{
 		Title:        getCategoryName(categoryId) + " - Mercadillo Global",
 		CategoryId:   categoryId,
 		CategoryName: getCategoryName(categoryId),
-		Products:     getEnrichedProducts(getCategoryProducts(categoryId)),
+		Products:     products,
 		Filters:      getFilters(),
+		Pagination:   pagination,
 		PageTemplate: "category-content",
 	}
 	return c.Render(http.StatusOK, "base.html", data)
@@ -141,11 +158,6 @@ func getCategoryName(categoryId string) string {
 	return "Categoría Desconocida"
 }
 
-func getCategoryProducts(categoryId string) []models.Product {
-	// Placeholder implementation
-	return []models.Product{}
-}
-
 func getFilters() []models.Filter {
 	return []models.Filter{
 		{
@@ -165,4 +177,44 @@ func getFilters() []models.Filter {
 			Options: []string{"Envío gratis", "Envío express"},
 		},
 	}
+}
+
+// getCategoryProductsWithCursor usa cursor pagination encriptado para mejor rendimiento
+func getCategoryProductsWithCursor(categoryId, encryptedCursor string, limit int) ([]models.EnrichedProduct, models.Pagination, error) {
+	products, nextEncryptedCursor, hasMore, err := models.GetProductsByCategoryCursor(H.DB(), categoryId, encryptedCursor, limit)
+	if err != nil {
+		return nil, models.Pagination{}, err
+	}
+
+	// Convertir a productos enriquecidos
+	enrichedProducts := make([]models.EnrichedProduct, len(products))
+	for i, product := range products {
+		enrichedProducts[i] = models.EnrichedProduct{
+			Product:                product,
+			FormattedPrice:         H.MaybeFormatNumber(float64(product.Price), true),
+			FormattedOriginalPrice: H.MaybeFormatNumber(float64(product.OriginalPrice), true),
+			Discount:               calculateDiscount(product.OriginalPrice, product.Price),
+			Stars:                  []int{0, 1, 2, 3, 4},
+			RatingInt:              int(product.Rating),
+		}
+	}
+
+	// Paginación optimizada con cursors encriptados
+	pagination := models.Pagination{
+		ItemsPerPage: limit,
+		HasNext:      hasMore,
+		HasPrev:      encryptedCursor != "", // Si hay cursor, significa que hay página anterior
+		NextCursor:   nextEncryptedCursor,
+		PrevCursor:   encryptedCursor, // El cursor actual se convierte en el cursor anterior
+	}
+
+	return enrichedProducts, pagination, nil
+}
+
+// calculateDiscount helper function
+func calculateDiscount(originalPrice, price int) int {
+	if originalPrice == 0 {
+		return 0
+	}
+	return int(float64(originalPrice-price) / float64(originalPrice) * 100)
 }

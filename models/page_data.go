@@ -5,6 +5,14 @@ type Filter struct {
 	Options []string
 }
 
+type Pagination struct {
+	ItemsPerPage int    `json:"items_per_page"`
+	HasNext      bool   `json:"has_next"`
+	HasPrev      bool   `json:"has_prev"`
+	NextCursor   string `json:"next_cursor,omitempty"`
+	PrevCursor   string `json:"prev_cursor,omitempty"`
+}
+
 type HomePageData struct {
 	Title            string
 	FeaturedProducts []EnrichedProduct
@@ -18,6 +26,7 @@ type CategoryPageData struct {
 	CategoryName string
 	Products     []EnrichedProduct
 	Filters      []Filter
+	Pagination   Pagination
 	PageTemplate string
 }
 

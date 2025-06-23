@@ -1,8 +1,12 @@
 package H
 
 import (
+	"crypto/aes"
+	"crypto/cipher"
+	"crypto/rand"
 	"crypto/sha256"
 	"crypto/sha512"
+	"encoding/base64"
 	"encoding/hex"
 	"encoding/json"
 	"errors"
@@ -1106,4 +1110,132 @@ func Int64ToUint64Ptr(i int64) *uint64 {
 		u = uint64(i)
 	}
 	return &u
+}
+
+// GetIntParam obtiene un parámetro entero de la query string con valor por defecto
+func GetIntParam(c echo.Context, param string, defaultValue int) int {
+	valueStr := c.QueryParam(param)
+	if IsEmpty(valueStr) {
+		return defaultValue
+	}
+
+	value, err := strconv.Atoi(valueStr)
+	if err != nil {
+		return defaultValue
+	}
+
+	// Validar que sea positivo
+	if value < 1 {
+		return defaultValue
+	}
+
+	return value
+}
+
+// CursorData estructura para los datos del cursor
+type CursorData struct {
+	Timestamp string `json:"timestamp"`
+}
+
+// EncryptCursor encripta un cursor usando AES-256-GCM
+func EncryptCursor(cursorData CursorData) (string, error) {
+	// Convertir a JSON
+	jsonData, err := json.Marshal(cursorData)
+	if err != nil {
+		return "", err
+	}
+
+	// Codificar en base64
+	b64Data := base64.StdEncoding.EncodeToString(jsonData)
+
+	// Obtener clave de encriptación
+	key := []byte(os.Getenv("CURSOR_ENCRYPTION_KEY"))
+	if len(key) != 32 {
+		return "", fmt.Errorf("encryption key must be 32 bytes long")
+	}
+
+	// Crear cipher AES
+	block, err := aes.NewCipher(key)
+	if err != nil {
+		return "", err
+	}
+
+	// Crear GCM
+	gcm, err := cipher.NewGCM(block)
+	if err != nil {
+		return "", err
+	}
+
+	// Generar nonce
+	nonce := make([]byte, gcm.NonceSize())
+	if _, err := rand.Read(nonce); err != nil {
+		return "", err
+	}
+
+	// Encriptar
+	ciphertext := gcm.Seal(nonce, nonce, []byte(b64Data), nil)
+
+	// Codificar en base64 el resultado final
+	return base64.StdEncoding.EncodeToString(ciphertext), nil
+}
+
+// DecryptCursor desencripta un cursor encriptado
+func DecryptCursor(encryptedCursor string) (CursorData, error) {
+	var cursorData CursorData
+
+	if IsEmpty(encryptedCursor) {
+		return cursorData, nil
+	}
+
+	// Decodificar base64
+	ciphertext, err := base64.StdEncoding.DecodeString(encryptedCursor)
+	if err != nil {
+		return cursorData, err
+	}
+
+	// Obtener clave de encriptación
+	key := []byte(os.Getenv("CURSOR_ENCRYPTION_KEY"))
+	if len(key) != 32 {
+		return cursorData, fmt.Errorf("encryption key must be 32 bytes long")
+	}
+
+	// Crear cipher AES
+	block, err := aes.NewCipher(key)
+	if err != nil {
+		return cursorData, err
+	}
+
+	// Crear GCM
+	gcm, err := cipher.NewGCM(block)
+	if err != nil {
+		return cursorData, err
+	}
+
+	// Extraer nonce
+	nonceSize := gcm.NonceSize()
+	if len(ciphertext) < nonceSize {
+		return cursorData, fmt.Errorf("ciphertext too short")
+	}
+
+	nonce, ciphertext := ciphertext[:nonceSize], ciphertext[nonceSize:]
+
+	// Desencriptar
+	b64Data, err := gcm.Open(nil, nonce, ciphertext, nil)
+	if err != nil {
+		return cursorData, err
+	}
+
+	// Decodificar base64
+	jsonData, err := base64.StdEncoding.DecodeString(string(b64Data))
+	if err != nil {
+		return cursorData, err
+	}
+
+	// Convertir de JSON
+	err = json.Unmarshal(jsonData, &cursorData)
+	if err != nil {
+		return cursorData, err
+	}
+
+	return cursorData, nil
 }

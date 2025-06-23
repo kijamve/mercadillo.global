@@ -274,3 +274,63 @@ func calculateDiscount(originalPrice, price int) int {
 	}
 	return int(float64(originalPrice-price) / float64(originalPrice) * 100)
 }
+
+// GetProductsByCategoryCursor versión ultra-optimizada usando cursor pagination encriptado
+// Más eficiente para millones de registros que OFFSET/LIMIT
+func GetProductsByCategoryCursor(db *gorm.DB, categoryID string, encryptedCursor string, limit int) ([]Product, string, bool, error) {
+	var products []Product
+
+	query := db.Table("products p").
+		Select("p.*").
+		Joins("INNER JOIN product_categories pc ON p.id = pc.product_id").
+		Where("pc.category_id = ? AND p.status = ?", categoryID, "active")
+
+	// Si hay cursor encriptado, desencriptarlo y usar paginación basada en cursor
+	if encryptedCursor != "" {
+		// Desencriptar cursor
+		cursorData, err := H.DecryptCursor(encryptedCursor)
+		if err != nil {
+			// Si hay error al desencriptar, ignorar cursor y empezar desde el principio
+			// En producción podrías loggear este error
+		} else if cursorData.Timestamp != "" {
+			// Usar solo el timestamp para filtrar
+			query = query.Where("p.created_at < ?", cursorData.Timestamp)
+		}
+	}
+
+	// Obtener productos ordenados solo por fecha
+	err := query.Order("p.created_at DESC").
+		Limit(limit + 1). // +1 para saber si hay más páginas
+		Find(&products).Error
+
+	if err != nil {
+		return nil, "", false, err
+	}
+
+	// Determinar si hay más páginas
+	hasMore := len(products) > limit
+	if hasMore {
+		products = products[:limit] // Remover el elemento extra
+	}
+
+	// Generar cursor encriptado para la siguiente página
+	var nextEncryptedCursor string
+	if hasMore && len(products) > 0 {
+		lastProduct := products[len(products)-1]
+
+		// Crear datos del cursor solo con timestamp
+		cursorData := H.CursorData{
+			Timestamp: lastProduct.CreatedAt.Format("2006-01-02T15:04:05Z"),
+		}
+
+		// Encriptar cursor
+		nextEncryptedCursor, err = H.EncryptCursor(cursorData)
+		if err != nil {
+			// En caso de error al encriptar, continuar sin cursor
+			// En producción deberías loggear este error
+			nextEncryptedCursor = ""
+		}
+	}
+
+	return products, nextEncryptedCursor, hasMore, nil
+}
