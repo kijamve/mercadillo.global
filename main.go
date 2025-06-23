@@ -35,7 +35,9 @@ func main() {
 		"formatNumber": func(number float64) string {
 			return H.MaybeFormatNumber(number, true)
 		},
-		"isEmpty": H.IsEmpty,
+		"isEmpty":       H.IsEmpty,
+		"jsonDecode":    H.JSONDecode,
+		"jsonDecodeMap": H.JSONDecodeMap,
 	}
 
 	templates := template.Must(template.New("").Funcs(funcMap).ParseGlob("templates/**/*.html"))

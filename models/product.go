@@ -28,7 +28,6 @@ type Product struct {
 	FreeShipping   bool      `json:"free_shipping" gorm:"default:false"`
 	Description    string    `json:"description" gorm:"type:text"`
 	Specifications string    `json:"specifications" gorm:"type:json"`
-	CategoryID     string    `json:"category_id" gorm:"type:varchar(50);not null;index"`
 	SearchContent  string    `json:"search_content" gorm:"type:text;comment:'AI-generated optimized search content: title + category + key specs'"`
 	SearchKeywords string    `json:"search_keywords" gorm:"type:varchar(500);comment:'AI-generated comma-separated keywords for enhanced search'"`
 	Status         string    `json:"status" gorm:"type:enum('active','wait_for_ia','wait_for_human_review','pause','draft');default:'draft'"`
@@ -38,11 +37,26 @@ type Product struct {
 	UpdatedAt      time.Time `json:"updated_at"`
 
 	// Relations
-	User       User               `json:"user" gorm:"foreignKey:UserID"`
-	Questions  []Question         `json:"questions" gorm:"foreignKey:ProductID"`
-	Reviews    []Review           `json:"reviews" gorm:"foreignKey:ProductID"`
-	Attributes []ProductAttribute `json:"attributes" gorm:"foreignKey:ProductID"`
-	Warehouses []ProductWarehouse `json:"warehouses" gorm:"foreignKey:ProductID"`
+	User              User               `json:"user" gorm:"foreignKey:UserID"`
+	Questions         []Question         `json:"questions" gorm:"foreignKey:ProductID"`
+	Reviews           []Review           `json:"reviews" gorm:"foreignKey:ProductID"`
+	Attributes        []ProductAttribute `json:"attributes" gorm:"foreignKey:ProductID"`
+	Warehouses        []ProductWarehouse `json:"warehouses" gorm:"foreignKey:ProductID"`
+	Categories        []Category         `json:"categories" gorm:"many2many:product_categories;"`
+	ProductCategories []ProductCategory  `json:"product_categories" gorm:"foreignKey:ProductID"`
+}
+
+type ProductCategory struct {
+	ID         string    `json:"id" gorm:"type:char(36);primaryKey"`
+	ProductID  string    `json:"product_id" gorm:"type:char(36);not null;index"`
+	CategoryID string    `json:"category_id" gorm:"type:varchar(36);not null;index"`
+	IsPrimary  bool      `json:"is_primary" gorm:"default:false;comment:'Indicates if this is the primary category for the product'"`
+	CreatedAt  time.Time `json:"created_at"`
+	UpdatedAt  time.Time `json:"updated_at"`
+
+	// Relations
+	Product  Product  `json:"product" gorm:"foreignKey:ProductID"`
+	Category Category `json:"category" gorm:"foreignKey:CategoryID"`
 }
 
 type ProductAttribute struct {
@@ -72,6 +86,8 @@ type EnrichedProduct struct {
 	TotalWeight            int                `json:"total_weight"` // en gramos
 	GlobalAttributes       []ProductAttribute `json:"global_attributes"`
 	ShippingOptions        []ShippingCost     `json:"shipping_options"`
+	PrimaryCategory        *Category          `json:"primary_category"` // La categoría principal del producto
+	AllCategories          []Category         `json:"all_categories"`   // Todas las categorías del producto
 }
 
 // Specification struct for JSON serialization
@@ -103,16 +119,38 @@ func (pa *ProductAttribute) BeforeCreate(tx *gorm.DB) error {
 	return nil
 }
 
+func (pc *ProductCategory) BeforeCreate(tx *gorm.DB) error {
+	if H.IsEmpty(pc.ID) {
+		pc.ID = H.NewUUID()
+	}
+	return nil
+}
+
 // GenerateSearchContent genera contenido optimizado para búsqueda usando IA
 func (p *Product) GenerateSearchContent() {
 	// Esta función debería integrarse con tu servicio de IA
 	// Por ahora genero un contenido básico como ejemplo
 
-	// Obtener el nombre de la categoría desde las categorías cargadas
-	category := GetCategoryByID(p.CategoryID)
-	categoryName := ""
-	if category != nil {
-		categoryName = category.Name
+	// Obtener nombres de todas las categorías asociadas
+	categoryNames := ""
+	for _, category := range p.Categories {
+		if categoryNames != "" {
+			categoryNames += " "
+		}
+		categoryNames += category.Name
+	}
+
+	// Si no hay categorías cargadas pero hay ProductCategories, usar esos IDs
+	if categoryNames == "" && len(p.ProductCategories) > 0 {
+		for _, pc := range p.ProductCategories {
+			category := GetCategoryByID(pc.CategoryID)
+			if category != nil {
+				if categoryNames != "" {
+					categoryNames += " "
+				}
+				categoryNames += category.Name
+			}
+		}
 	}
 
 	// Extraer especificaciones clave
@@ -126,20 +164,20 @@ func (p *Product) GenerateSearchContent() {
 
 	for _, spec := range specs {
 		specText += spec.Name + " " + spec.Value + " "
-		keywords += spec.Value + ", "
+		// keywords += spec.Value + ", "
 	}
 
 	// Generar search_content optimizado
 	p.SearchContent = fmt.Sprintf("%s %s %s %s",
 		p.Title,
-		categoryName,
+		categoryNames,
 		p.Description,
 		specText)
 
 	// Generar keywords
 	p.SearchKeywords = fmt.Sprintf("%s, %s, %s",
 		p.Title,
-		categoryName,
+		categoryNames,
 		keywords)
 }
 
@@ -147,12 +185,23 @@ func (p *Product) GenerateSearchContent() {
 func GetProductWithWarehouses(db *gorm.DB, productID string) (*EnrichedProduct, error) {
 	var product Product
 
-	// Obtener producto con relaciones
-	err := db.Preload("Warehouses").
+	// Obtener producto con relaciones incluyendo las categorías
+	err := db.Preload("User").
+		Preload("Warehouses").
 		Preload("Warehouses.Warehouse").
 		Preload("Warehouses.ShippingCosts").
+		Preload("Warehouses.Attributes").
+		Preload("Warehouses.Attributes.ProductWarehouse").
 		Preload("Attributes").
 		Preload("Attributes.ProductWarehouse").
+		Preload("Categories").
+		Preload("ProductCategories").
+		Preload("Questions").
+		Preload("Questions.QuestionVotes").
+		Preload("Questions.QuestionVotes.User").
+		Preload("Reviews").
+		Preload("Reviews.ReviewVotes").
+		Preload("Reviews.ReviewVotes.User").
 		First(&product, "id = ?", productID).Error
 
 	if err != nil {
@@ -178,6 +227,27 @@ func GetProductWithWarehouses(db *gorm.DB, productID string) (*EnrichedProduct, 
 		}
 	}
 
+	// Cargar las categorías desde el sistema de categorías global
+	var allCategories []Category
+	var primaryCategory *Category
+
+	for _, pc := range product.ProductCategories {
+		category := GetCategoryByID(pc.CategoryID)
+		if category != nil {
+			allCategories = append(allCategories, *category)
+
+			// Si es la categoría primaria, guardarla por separado
+			if pc.IsPrimary {
+				primaryCategory = category
+			}
+		}
+	}
+
+	// Si no hay categoría primaria definida pero sí hay categorías, usar la primera como primaria
+	if primaryCategory == nil && len(allCategories) > 0 {
+		primaryCategory = &allCategories[0]
+	}
+
 	enrichedProduct := &EnrichedProduct{
 		Product:                product,
 		FormattedPrice:         H.MaybeFormatNumber(float64(product.Price), true),
@@ -190,6 +260,8 @@ func GetProductWithWarehouses(db *gorm.DB, productID string) (*EnrichedProduct, 
 		TotalWeight:            int(totalWeight * 1000), // Convertir kg a gramos
 		GlobalAttributes:       globalAttributes,
 		ShippingOptions:        allShippingCosts,
+		PrimaryCategory:        primaryCategory,
+		AllCategories:          allCategories,
 	}
 
 	return enrichedProduct, nil
